@@ -1,5 +1,14 @@
+interface TacticItem {
+    id: number
+    title: string
+    description: string
+    example: string
+    dos?: string[]
+    donts?: string[]
+}
+
 export default function PromptTactics() {
-    const audienceTactics = [
+    const audienceTactics: TacticItem[] = [
         {
             id: 13,
             title: 'Informele uitnodiging per (Whats)app',
@@ -14,7 +23,7 @@ export default function PromptTactics() {
         }
     ]
 
-    const outputConstraints = [
+    const outputConstraints: TacticItem[] = [
         {
             id: 15,
             title: 'Maximaal drie alinea\'s',
@@ -35,7 +44,7 @@ export default function PromptTactics() {
         }
     ]
 
-    const formatSpecification = [
+    const formatSpecification: TacticItem[] = [
         {
             id: 18,
             title: 'Genummerde lijst met kopjes per item',
@@ -56,7 +65,7 @@ export default function PromptTactics() {
         }
     ]
 
-    const taskSpecification = [
+    const taskSpecification: TacticItem[] = [
         {
             id: 21,
             title: 'Identificeer de drie grootste risico\'s',
@@ -77,7 +86,7 @@ export default function PromptTactics() {
         }
     ]
 
-    const instructionCombination = [
+    const instructionCombination: TacticItem[] = [
         {
             id: 24,
             title: 'Combinatie van meerdere instructies',
@@ -90,7 +99,7 @@ Geef concrete aanbevelingen in bullet points.`
         }
     ]
 
-    const contextSpecification = [
+    const contextSpecification: TacticItem[] = [
         {
             id: 25,
             title: 'Achtergrondinformatie verstrekken',
@@ -105,7 +114,7 @@ Geef concrete aanbevelingen in bullet points.`
         }
     ]
 
-    const documentChunking = [
+    const documentChunking: TacticItem[] = [
         {
             id: 27,
             title: 'Groot document opsplitsen',
@@ -116,7 +125,7 @@ Geef concrete aanbevelingen in bullet points.`
         }
     ]
 
-    const renderSection = (title: string, items: typeof audienceTactics) => (
+    const renderSection = (title: string, items: TacticItem[]) => (
         <div className="mb-12">
             <h3 className="text-lg font-medium mb-6">{title}</h3>
             <div className="space-y-8">
@@ -138,7 +147,7 @@ Geef concrete aanbevelingen in bullet points.`
                                 <div className="rounded-lg border bg-card p-4">
                                     <h5 className="font-medium mb-3">✓ Do's</h5>
                                     <ul className="space-y-2 text-muted-foreground">
-                                        {item.dos.map((doItem, idx) => (
+                                        {item.dos?.map((doItem: string, idx: number) => (
                                             <li key={idx} className="leading-relaxed" dangerouslySetInnerHTML={{ __html: `• ${doItem}` }} />
                                         ))}
                                     </ul>
@@ -146,7 +155,7 @@ Geef concrete aanbevelingen in bullet points.`
                                 <div className="rounded-lg border bg-card p-4">
                                     <h5 className="font-medium mb-3">✗ Don'ts</h5>
                                     <ul className="space-y-2 text-muted-foreground">
-                                        {item.donts.map((dontItem, idx) => (
+                                        {item.donts?.map((dontItem: string, idx: number) => (
                                             <li key={idx} className="leading-relaxed" dangerouslySetInnerHTML={{ __html: `• ${dontItem}` }} />
                                         ))}
                                     </ul>
