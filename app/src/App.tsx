@@ -1,4 +1,5 @@
 import './App.css'
+import { useState, useEffect } from 'react'
 import { SidebarProvider, SidebarInset } from '@/components/ui/sidebar'
 import { AppSidebar } from './components/AppSidebar'
 import Introduction from './components/Introduction'
@@ -11,8 +12,21 @@ import CombinationTechniques from './components/CombinationTechniques'
 import ConversationalPrompting from './components/ConversationalPrompting'
 import ReflectivePrompting from './components/ReflectivePrompting'
 import PracticalTools from './components/PracticalTools'
+import PasswordScreen from './components/PasswordScreen'
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+
+  useEffect(() => {
+    // Check if user is already authenticated in this session
+    const authenticated = sessionStorage.getItem('authenticated') === 'true'
+    setIsAuthenticated(authenticated)
+  }, [])
+
+  if (!isAuthenticated) {
+    return <PasswordScreen onAuthenticated={() => setIsAuthenticated(true)} />
+  }
+
   return (
     <SidebarProvider>
       <AppSidebar />
