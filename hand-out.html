@@ -1,0 +1,1702 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompting hand-out voor advocaten</title>
+    <style>
+        :root {
+            --background: 0 0% 100%;
+            --foreground: 222.2 84% 4.9%;
+            --card: 0 0% 100%;
+            --card-foreground: 222.2 84% 4.9%;
+            --primary: 221.2 83.2% 53.3%;
+            --primary-foreground: 210 40% 98%;
+            --secondary: 210 40% 96.1%;
+            --secondary-foreground: 222.2 47.4% 11.2%;
+            --muted: 210 40% 96.1%;
+            --muted-foreground: 215.4 16.3% 46.9%;
+            --accent: 210 40% 96.1%;
+            --accent-foreground: 222.2 47.4% 11.2%;
+            --border: 214.3 31.8% 91.4%;
+            --radius: 0.5rem;
+            --success: 142 71% 45%;
+            --warning: 38 92% 50%;
+            --destructive: 0 84% 60%;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            font-size: 15px;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: hsl(var(--foreground));
+            background: hsl(var(--background));
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(221.2 83.2% 43.3%) 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 0 0 0.5rem 0;
+            letter-spacing: -0.02em;
+        }
+
+        .header .subtitle {
+            font-size: 1.125rem;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.625rem 1rem 0.625rem 2.5rem;
+            border: 1px solid hsl(var(--border));
+            border-radius: var(--radius);
+            font-size: 0.875rem;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .search-box input:focus {
+            border-color: hsl(var(--primary));
+            box-shadow: 0 0 0 3px hsl(var(--primary) / 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: hsl(var(--muted-foreground));
+        }
+
+        .btn {
+            padding: 0.625rem 1.25rem;
+            border: none;
+            border-radius: var(--radius);
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: hsl(var(--primary));
+            color: hsl(var(--primary-foreground));
+        }
+
+        .btn-primary:hover {
+            background: hsl(221.2 83.2% 48.3%);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+
+        .btn-secondary {
+            background: hsl(var(--secondary));
+            color: hsl(var(--secondary-foreground));
+        }
+
+        .btn-secondary:hover {
+            background: hsl(210 40% 92%);
+        }
+
+        .card {
+            background: hsl(var(--card));
+            border: 1px solid hsl(var(--border));
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+        }
+
+        .card-header {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: hsl(var(--foreground));
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 2rem 0 1rem 0;
+            color: hsl(var(--foreground));
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem 0;
+            color: hsl(var(--primary));
+            border-bottom: 2px solid hsl(var(--border));
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 1.5rem 0 0.75rem 0;
+            color: hsl(var(--foreground));
+        }
+
+        .intro-box {
+            background: linear-gradient(135deg, hsl(var(--primary) / 0.05) 0%, hsl(var(--primary) / 0.1) 100%);
+            border-left: 4px solid hsl(var(--primary));
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: var(--radius);
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, hsl(var(--destructive) / 0.05) 0%, hsl(var(--destructive) / 0.1) 100%);
+            border-left: 4px solid hsl(var(--destructive));
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: var(--radius);
+        }
+
+        .success-box {
+            background: linear-gradient(135deg, hsl(var(--success) / 0.05) 0%, hsl(var(--success) / 0.1) 100%);
+            border-left: 4px solid hsl(var(--success));
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: var(--radius);
+        }
+
+        .tip-box {
+            background: linear-gradient(135deg, hsl(var(--success) / 0.05) 0%, hsl(var(--success) / 0.08) 100%);
+            border-left: 4px solid hsl(var(--success));
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: var(--radius);
+        }
+
+        .technique-box {
+            background: hsl(var(--card));
+            border: 1px solid hsl(var(--border));
+            padding: 1.25rem;
+            margin: 1rem 0;
+            border-radius: var(--radius);
+            transition: all 0.2s;
+        }
+
+        .technique-box:hover {
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            border-color: hsl(var(--primary) / 0.3);
+        }
+
+        .technique-title {
+            color: hsl(var(--primary));
+            font-weight: 600;
+            font-size: 1.125rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .technique-description {
+            color: hsl(var(--muted-foreground));
+            font-style: italic;
+            margin-bottom: 0.75rem;
+            font-size: 0.9375rem;
+        }
+
+        .prompt-example {
+            background: hsl(var(--muted));
+            padding: 1rem;
+            margin: 0.75rem 0;
+            border-radius: var(--radius);
+            font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            border-left: 3px solid hsl(var(--primary));
+        }
+
+        .framework-box {
+            background: linear-gradient(135deg, hsl(175 60% 95%) 0%, hsl(175 60% 98%) 100%);
+            border-left: 4px solid hsl(175 60% 45%);
+            padding: 1.25rem;
+            margin: 1rem 0;
+            border-radius: var(--radius);
+        }
+
+        .framework-title {
+            color: hsl(175 60% 35%);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .dos-donts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .dos-box {
+            background: linear-gradient(135deg, hsl(var(--success) / 0.05) 0%, hsl(var(--success) / 0.1) 100%);
+            border-left: 4px solid hsl(var(--success));
+            padding: 1rem;
+            border-radius: var(--radius);
+        }
+
+        .donts-box {
+            background: linear-gradient(135deg, hsl(var(--destructive) / 0.05) 0%, hsl(var(--destructive) / 0.1) 100%);
+            border-left: 4px solid hsl(var(--destructive));
+            padding: 1rem;
+            border-radius: var(--radius);
+        }
+
+        .dos-box h4, .donts-box h4 {
+            margin: 0 0 0.75rem 0;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .dos-box h4 {
+            color: hsl(var(--success));
+        }
+
+        .donts-box h4 {
+            color: hsl(var(--destructive));
+        }
+
+        ul, ol {
+            margin: 0.75rem 0;
+            padding-left: 1.5rem;
+        }
+
+        li {
+            margin: 0.375rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.875rem;
+        }
+
+        th {
+            background: hsl(var(--primary));
+            color: white;
+            padding: 0.75rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 0.75rem;
+            border: 1px solid hsl(var(--border));
+        }
+
+        tr:nth-child(even) {
+            background: hsl(var(--muted) / 0.3);
+        }
+
+        .toc {
+            background: hsl(var(--card));
+            border: 1px solid hsl(var(--border));
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .toc h2 {
+            margin-top: 0;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .toc ol {
+            list-style-position: inside;
+        }
+
+        .toc a {
+            color: hsl(var(--primary));
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+            color: hsl(221.2 83.2% 43.3%);
+        }
+
+        .use-case-index {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .use-case-card {
+            background: hsl(var(--card));
+            border: 1px solid hsl(var(--border));
+            border-radius: var(--radius);
+            padding: 1.25rem;
+            transition: all 0.2s;
+        }
+
+        .use-case-card:hover {
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            border-color: hsl(var(--primary));
+        }
+
+        .use-case-card h4 {
+            color: hsl(var(--primary));
+            margin: 0 0 0.75rem 0;
+            font-size: 1.125rem;
+        }
+
+        .use-case-card ul {
+            margin: 0;
+            padding-left: 1.25rem;
+            font-size: 0.875rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .badge-beginner {
+            background: hsl(var(--success) / 0.1);
+            color: hsl(var(--success));
+        }
+
+        .badge-intermediate {
+            background: hsl(var(--warning) / 0.1);
+            color: hsl(var(--warning));
+        }
+
+        .badge-advanced {
+            background: hsl(var(--destructive) / 0.1);
+            color: hsl(var(--destructive));
+        }
+
+        strong {
+            font-weight: 600;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media print {
+            .header {
+                background: hsl(var(--primary)) !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .toolbar {
+                display: none !important;
+            }
+
+            .technique-box, .card {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+
+            h2, h3 {
+                page-break-after: avoid;
+                break-after: avoid;
+            }
+
+            .intro-box, .warning-box, .success-box, .tip-box, .framework-box {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+
+            .dos-donts-grid {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+
+            body {
+                font-size: 11pt;
+            }
+
+            .container {
+                max-width: 100%;
+                padding: 1cm;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .dos-donts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 1.75rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Prompting hand-out voor advocaten</h1>
+    <div class="subtitle">Praktische handleiding voor effectieve gebruik van AI-tools door advocaten</div>
+</div>
+
+<div class="container">
+    <div class="toolbar">
+        <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="searchInput" placeholder="Zoek naar technieken, frameworks of toepassingen...">
+        </div>
+        <button class="btn btn-primary" onclick="window.print()">
+            📄 Print / Opslaan als PDF
+        </button>
+        <button class="btn btn-secondary" onclick="downloadHTML()">
+            💾 Download HTML
+        </button>
+    </div>
+
+    <div class="intro-box">
+        <h2 style="margin-top: 0; border-bottom: none;">Introductie</h2>
+        <p>Deze handout biedt een overzicht van de belangrijkste promptingtechnieken specifiek voor juridisch werk. Prompting is de kunst van het formuleren van effectieve vragen en opdrachten aan AI-tools. Hoe beter je prompt, hoe relevanter en bruikbaarder de output.</p>
+        
+        <p>Effectief prompting verhoogt de kwaliteit van juridische analyses, bespaart tijd bij documentverwerking en helpt bij het structureren van complexe rechtsvragen. De technieken variëren van eenvoudige instructies tot geavanceerde (conversationele) methoden.</p>
+        
+        <p><strong>Hoe gebruik je deze handout?</strong> Begin met de basistechnieken, experimenteer met verschillende tactieken en doe geleidelijk ervaring op. De voorbeelden zijn direct toepasbaar in je dagelijkse praktijk.</p>
+    </div>
+
+    <div class="warning-box">
+        <p><strong style="color: hsl(var(--destructive));">⚠️ Belangrijke waarschuwing: juridisch onderzoek en hallucinaties</strong></p>
+        <p>AI-tools zoals ChatGPT, Claude en Gemini zijn <strong>niet gemaakt voor juridisch onderzoek. Zij hebben namelijk geen toegang tot rechtsbronnen (zoals actuele Nederlandse wet- en regelgeving of jurisprudentie)</strong>. Bij vragen over specifieke wetsartikelen, uitspraken of regelgeving bestaat een groot risico op <strong>hallucinaties</strong>, de AI verzint dan overtuigend klinkende maar feitelijk onjuiste informatie.</p>
+        <p><strong>Voor betrouwbaar juridisch onderzoek heb je twee opties:</strong></p>
+        <ul>
+            <li>Voeg zelf de relevante <strong>wetteksten, jurisprudentie of andere juridische bronnen als bijlage</strong> toe aan je prompt, zodat de AI alleen kan putten uit betrouwbaar materiaal</li>
+            <li>Gebruik een <strong>gespecialiseerde juridische AI-tool</strong> die toegang heeft tot actuele juridische databases (zoals Zeno of Andri)</li>
+        </ul>
+        <p><strong>Vertrouw nooit blind op AI-output bij juridische vragen zonder deze te verifiëren met betrouwbare bronnen.</strong></p>
+    </div>
+
+    <div class="toc">
+        <h2>Inhoudsopgave</h2>
+        <ol>
+            <li><a href="#use-case-index">Index op juridische use cases</a></li>
+            <li><a href="#best-practices">Best practices & praktische tips</a></li>
+            <li><a href="#output-validation">Output validation checklist</a></li>
+            <li><a href="#basistechnieken">Basistechnieken (1-11)</a></li>
+            <li><a href="#prompttactieken">Prompttactieken (12-18)</a></li>
+            <li><a href="#frameworks">Juridische & taalframeworks (19-21)</a></li>
+            <li><a href="#combinatietechnieken">Combinatietechnieken</a></li>
+            <li><a href="#conversational">Conversational prompting (22-29)</a></li>
+            <li><a href="#reflective">Reflective prompting (30-37)</a></li>
+            <li><a href="#hulpmiddelen">Praktische hulpmiddelen (38-39)</a></li>
+            <li><a href="#quick-reference">Quick reference</a></li>
+        </ol>
+    </div>
+
+    <section id="use-case-index">
+        <h2>Index op juridische use cases</h2>
+        <p>Vind snel de juiste techniek voor jouw situatie:</p>
+        
+        <div class="use-case-index">
+            <div class="use-case-card">
+                <h4>📄 Contractanalyse</h4>
+                <ul>
+                    <li>Few shot prompting (#2)</li>
+                    <li>Chained prompts (#3)</li>
+                    <li>Chain of thought (#4)</li>
+                    <li>Chunking (#18)</li>
+                    <li>IRAC framework (#19)</li>
+                    <li>Confirm-and-continue (#26)</li>
+                </ul>
+            </div>
+
+            <div class="use-case-card">
+                <h4>⚖️ Processtukken</h4>
+                <ul>
+                    <li>Persona prompting (#6-8)</li>
+                    <li>Chain of thought (#4)</li>
+                    <li>IRAC framework (#19)</li>
+                    <li>SATO framework (#19)</li>
+                    <li>Devil's advocate (#37)</li>
+                    <li>Juridische onderzoeksassistent (#39)</li>
+                </ul>
+            </div>
+
+            <div class="use-case-card">
+                <h4>💼 Cliëntcommunicatie</h4>
+                <ul>
+                    <li>Audience specification (#12-13)</li>
+                    <li>Output constraints (#14-16)</li>
+                    <li>ELI5 framework (#19)</li>
+                    <li>WHY-HOW-WHAT framework (#19)</li>
+                    <li>Persona prompting (#7)</li>
+                </ul>
+            </div>
+
+            <div class="use-case-card">
+                <h4>🔍 Juridische analyse</h4>
+                <ul>
+                    <li>Step back prompting (#5)</li>
+                    <li>Chain of thought (#4)</li>
+                    <li>IRAC framework (#19)</li>
+                    <li>SCQA framework (#21)</li>
+                    <li>Multiple perspectives (#33-34)</li>
+                    <li>Compare answers (#35)</li>
+                </ul>
+            </div>
+
+            <div class="use-case-card">
+                <h4>🎯 Risicoanalyse</h4>
+                <ul>
+                    <li>Persona prompting (#8)</li>
+                    <li>Devil's advocate (#37)</li>
+                    <li>Bias-awareness (#36)</li>
+                    <li>Perspectiefwisseling (#33)</li>
+                    <li>Constraint layering (#17)</li>
+                </ul>
+            </div>
+
+            <div class="use-case-card">
+                <h4>💡 Strategische verkenning</h4>
+                <ul>
+                    <li>Brainstorm prompting (#9-11)</li>
+                    <li>Questions up front (#22-23)</li>
+                    <li>Step back prompting (#5)</li>
+                    <li>Compare answers (#35)</li>
+                    <li>Alternatieve interpretatie (#34)</li>
+                </ul>
+            </div>
+
+            <div class="use-case-card">
+                <h4>📋 Documentverwerking</h4>
+                <ul>
+                    <li>Chunking (#18)</li>
+                    <li>Chained prompts (#3)</li>
+                    <li>Stage gating (#28)</li>
+                    <li>5W1H framework (#19)</li>
+                    <li>MECE framework (#19)</li>
+                </ul>
+            </div>
+
+            <div class="use-case-card">
+                <h4>✍️ Schrijfopdrachten</h4>
+                <ul>
+                    <li>Few shot prompting (#2)</li>
+                    <li>Output constraints (#14-16)</li>
+                    <li>DGR framework (#19)</li>
+                    <li>Progressive prompting (#29)</li>
+                    <li>Voetnoten assistent (#38)</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="best-practices">
+        <h2>Best practices & praktische tips</h2>
+        
+        <div class="card">
+            <h3>Algemene principes voor effectief prompting:</h3>
+            <ul>
+                <li><strong>Wees specifiek en duidelijk</strong> – Vage opdrachten leveren vage resultaten. Benoem precies wat je verwacht.</li>
+                <li><strong>Geef context</strong> – Leg uit waarom je iets vraagt en voor wie de output bedoeld is.</li>
+                <li><strong>Begin breed, verfijn daarna</strong> – Start met een algemene vraag en zoom in op basis van het antwoord.</li>
+                <li><strong>Test en itereer</strong> – Probeer verschillende formuleringen en leer wat het beste werkt.</li>
+                <li><strong>Gebruik voorbeelden</strong> – Laat zien hoe je het wilt in plaats van alleen te vertellen.</li>
+                <li><strong>Stel grenzen</strong> – Beperk lengte, structuur of focus als dat helpt.</li>
+                <li><strong>Valideer de output</strong> – Controleer altijd juridische analyses en bronnen.</li>
+            </ul>
+        </div>
+
+        <div class="tip-box">
+            <p><strong>💡 Pro tip:</strong> Bewaar succesvolle prompts en bouw je eigen bibliotheek op. Wat vandaag werkt, kun je morgen hergebruiken en aanpassen.</p>
+        </div>
+
+        <div class="tip-box">
+            <p><strong>⚖️ Juridische context:</strong> AI-tools zijn geen vervanging voor juridische expertise. Gebruik ze als assistent bij research, structurering en eerste analyses, maar vertrouw niet blind op de output. Controleer altijd bronnen en conclusies.</p>
+        </div>
+
+        <div class="tip-box">
+            <p><strong>🔄 Iteratief werken:</strong> Zie prompting als een gesprek, niet als een eenmalige opdracht. Stel vervolgvragen, vraag om verduidelijking en verfijn stapsgewijs naar het gewenste resultaat.</p>
+        </div>
+    </section>
+
+    <section id="output-validation">
+        <h2>Output validation checklist</h2>
+        <p>Gebruik deze checklist om AI-output te valideren voordat je het gebruikt in juridisch werk:</p>
+
+        <div class="card">
+            <h3>✅ Algemene validatie</h3>
+            <ul>
+                <li>☐ <strong>Volledigheid:</strong> zijn alle aspecten van de vraag behandeld?</li>
+                <li>☐ <strong>Relevantie:</strong> sluit het antwoord aan bij de specifieke vraag?</li>
+                <li>☐ <strong>Structuur:</strong> is de output logisch en overzichtelijk opgebouwd?</li>
+                <li>☐ <strong>Toon:</strong> past de schrijfstijl bij het beoogde doel en publiek?</li>
+                <li>☐ <strong>Lengte:</strong> is de output niet te uitvoerig of juist te summier?</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3>⚖️ Juridische validatie</h3>
+            <ul>
+                <li>☐ <strong>Wettelijke bronnen:</strong> zijn genoemde wetsartikelen correct en actueel?</li>
+                <li>☐ <strong>Jurisprudentie:</strong> zijn rechtbankuitspraken correct geciteerd? (verifieer altijd)</li>
+                <li>☐ <strong>Rechtspraak:</strong> zijn de juridische conclusies logisch en onderbouwd?</li>
+                <li>☐ <strong>Toepasbaarheid:</strong> is het recht correct toegepast op de specifieke feiten?</li>
+                <li>☐ <strong>Actualiteit:</strong> houdt de analyse rekening met recente ontwikkelingen?</li>
+                <li>☐ <strong>Jurisdictie:</strong> is het juiste rechtsstelsel toegepast (NL/EU/internationaal)?</li>
+                <li>☐ <strong>Hallucinaties:</strong> geen verzonnen bronnen, artikelen of uitspraken?</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3>🔒 Privacy & compliance</h3>
+            <ul>
+                <li>☐ <strong>Vertrouwelijkheid:</strong> geen privacygevoelige informatie gedeeld met AI?</li>
+                <li>☐ <strong>Cliëntgegevens:</strong> zijn persoonsgegevens geanonimiseerd?</li>
+                <li>☐ <strong>Beroepsgeheim:</strong> is het beroepsgeheim gewaarborgd?</li>
+                <li>☐ <strong>Toestemming:</strong> heeft de cliënt toestemming gegeven voor AI-gebruik?</li>
+                <li>☐ <strong>AVG-compliance:</strong> voldoet het gebruik aan AVG-vereisten?</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3>🎯 Praktische validatie</h3>
+            <ul>
+                <li>☐ <strong>Uitvoerbaarheid:</strong> zijn de aanbevelingen realistisch en praktisch?</li>
+                <li>☐ <strong>Kosteneffectiviteit:</strong> staat het advies in verhouding tot het belang?</li>
+                <li>☐ <strong>Termijnen:</strong> zijn realistische deadlines gehanteerd?</li>
+                <li>☐ <strong>Risico's:</strong> zijn mogelijke risico's benoemd?</li>
+                <li>☐ <strong>Alternatieven:</strong> zijn verschillende opties overwogen?</li>
+            </ul>
+        </div>
+
+        <div class="warning-box">
+            <p><strong>⚠️ Belangrijke regel:</strong> Accepteer nooit juridische output van AI zonder deze te verifiëren met betrouwbare bronnen. AI kan overtuigend klinken maar feitelijk onjuist zijn. Jouw professionele verantwoordelijkheid blijft altijd leidend.</p>
+        </div>
+    </section>
+
+    <section id="basistechnieken">
+        <h2>Basistechnieken</h2>
+        <p>Deze fundamentele technieken vormen de basis van effectief prompting. Ze zijn eenvoudig toe te passen en direct bruikbaar in de dagelijkse praktijk.</p>
+
+        <div class="technique-box">
+            <div class="technique-title">1. Single shot prompting <span class="badge badge-beginner">Beginner</span></div>
+            <div class="technique-description">Wanneer te gebruiken: voor eenvoudige, directe vragen zonder voorbeelden. Effectief voor taken die duidelijk zijn en weinig context vereisen.</div>
+            <div class="prompt-example">Vat deze huurovereenkomst samen in 3 hoofdpunten.</div>
+            
+            <div class="dos-donts-grid">
+                <div class="dos-box">
+                    <h4>✅ Do's</h4>
+                    <ul>
+                        <li>Wees specifiek over wat je wilt</li>
+                        <li>Geef duidelijke output-verwachtingen</li>
+                        <li>Gebruik voor eenvoudige, duidelijke taken</li>
+                    </ul>
+                </div>
+                <div class="donts-box">
+                    <h4>❌ Don'ts</h4>
+                    <ul>
+                        <li>Geen vage of brede vragen</li>
+                        <li>Niet voor complexe analyses gebruiken</li>
+                        <li>Geen inconsistente format verwachten</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="technique-box">
+            <div class="technique-title">2. Few shot prompting <span class="badge badge-beginner">Beginner</span></div>
+            <div class="technique-description">Wanneer te gebruiken: als je specifieke voorbeelden wilt geven van hoe de output eruit moet zien. Verhoogt de consistentie en kwaliteit aanzienlijk.</div>
+            <div class="prompt-example">Hier zie je hoe ik bepalingen uit een arbeidsovereenkomst samenvat:
+
+1. Proeftijd: maximaal 1 maand, conform art. 7:652 lid 4 BW
+2. Concurrentiebeding: geldig voor 12 maanden na einde dienstverband, geografisch beperkt tot Nederland
+
+Vat nu de volgende bepaling op dezelfde manier samen: ....</div>
+            
+            <div class="dos-donts-grid">
+                <div class="dos-box">
+                    <h4>✅ Do's</h4>
+                    <ul>
+                        <li>Geef 2-5 concrete voorbeelden</li>
+                        <li>Zorg voor consistentie in voorbeelden</li>
+                        <li>Laat het gewenste format zien</li>
+                    </ul>
+                </div>
+                <div class="donts-box">
+                    <h4>❌ Don'ts</h4>
+                    <ul>
+                        <li>Geen tegenstrijdige voorbeelden</li>
+                        <li>Niet te veel voorbeelden (>5)</li>
+                        <li>Geen voorbeelden van slechte kwaliteit</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="technique-box">
+            <div class="technique-title">3. Chained prompts / Multi-step <span class="badge badge-intermediate">Gemiddeld</span></div>
+            <div class="technique-description">Wanneer te gebruiken: voor complexe taken die meerdere stappen vereisen. Deel het probleem op in beheersbare delen.</div>
+            <div class="prompt-example">Analyseer deze huurovereenkomst.
+Identificeer risico's voor verhuurder.
+Controleer op ongebruikelijke clausules.
+Geef concrete implementatie-aanbevelingen.</div>
+            
+            <div class="dos-donts-grid">
+                <div class="dos-box">
+                    <h4>✅ Do's</h4>
+                    <ul>
+                        <li>Splits complexe taken op</li>
+                        <li>Logische volgorde aanhouden</li>
+                        <li>Elke stap duidelijk formuleren</li>
+                    </ul>
+                </div>
+                <div class="donts-box">
+                    <h4>❌ Don'ts</h4>
+                    <ul>
+                        <li>Geen onlogische stappen-volgorde</li>
+                        <li>Niet te veel stappen (max 5-6)</li>
+                        <li>Geen afhankelijkheden overslaan</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="technique-box">
+            <div class="technique-title">4. Chain of thought prompting <span class="badge badge-intermediate">Gemiddeld</span></div>
+            <div class="technique-description">Wanneer te gebruiken: voor complexe juridische analyses waarbij stapsgewijze redenering vereist is. Verbetert de kwaliteit van juridische conclusies.</div>
+            <div class="prompt-example">Analyseer dit ontslagdossier stap voor stap:
+
+1. Identificeer eerst de juridische vraag.
+2. Bepaal welke artikelen uit het BW van toepassing zijn.
+3. Beoordeel of de procedure correct is gevolgd.
+4. Pas de regels toe op de specifieke feiten.
+5. Evalueer de kansen van beide partijen.
+6. Trek een gemotiveerde conclusie.</div>
+            
+            <div class="dos-donts-grid">
+                <div class="dos-box">
+                    <h4>✅ Do's</h4>
+                    <ul>
+                        <li>Vraag expliciet om stapsgewijze redenering</li>
+                        <li>Laat tussenstappen zien</li>
+                        <li>Gebruik voor juridische analyses</li>
+                    </ul>
+                </div>
+                <div class="donts-box">
+                    <h4>❌ Don'ts</h4>
+                    <ul>
+                        <li>Geen stappen overslaan toestaan</li>
+                        <li>Niet voor simpele vragen gebruiken</li>
+                        <li>Geen onduidelijke stappen-definities</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="technique-box">
+            <div class="technique-title">5. Step back prompting <span class="badge badge-intermediate">Gemiddeld</span></div>
+            <div class="technique-description">Wanneer te gebruiken: om eerst bredere principes te identificeren voordat je in details duikt. Zorgt voor betere contextualisering.</div>
+            <div class="prompt-example">Voordat je deze juridische vraag beantwoordt, neem eerst een stap terug.
+
+Welke bredere (juridische) principes zijn hier relevant?
+- Wat is de maatschappelijke context van dit vraagstuk?
+- Hoe past dit in de ontwikkeling van de rechtspraak?
+
+Nu pas: geef je specifieke juridische analyse.</div>
+            
+            <div class="dos-donts-grid">
+                <div class="dos-box">
+                    <h4>✅ Do's</h4>
+                    <ul>
+                        <li>Begin met bredere context</li>
+                        <li>Identificeer onderliggende principes</li>
+                        <li>Zoom daarna in op details</li>
+                    </ul>
+                </div>
+                <div class="donts-box">
+                    <h4>❌ Don'ts</h4>
+                    <ul>
+                        <li>Niet meteen naar conclusies springen</li>
+                        <li>Geen context overslaan</li>
+                        <li>Niet alleen details bekijken</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="technique-box">
+            <div class="technique-title">6. Persona prompting 1 – ervaren arbeidsrecht-advocaat <span class="badge badge-beginner">Beginner</span></div>
+            <div class="technique-description">Wanneer te gebruiken: om de AI een specifieke rol en expertise te geven. Beïnvloedt de toon en diepgang van het antwoord.</div>
+            <div class="prompt-example">Beantwoord mijn vragen als ervaren arbeidsrecht advocaat die deze zaak moet beoordelen. Welke aspecten vind je het meest relevant?</div>
+            
+            <div class="dos-donts-grid">
+                <div class="dos-box">
+                    <h4>✅ Do's</h4>
+                    <ul>
+                        <li>Kies relevante expertise</li>
+                        <li>Wees specifiek over de rol</li>
+                        <li>Geef context aan de persona</li>
+                    </ul>
+                </div>
+                <div class="donts-box">
+                    <h4>❌ Don'ts</h4>
+                    <ul>
+                        <li>Geen vage rollen ("expert")</li>
+                        <li>Niet meerdere tegenstrijdige rollen</li>
+                        <li>Geen irrelevante expertise vragen</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="technique-box">
+            <div class="technique-title">7. Persona prompting 2 – boze, zenuwachtige cliënt <span class="badge badge-intermediate">Gemiddeld</span></div>
+            <div class="technique-description">Wanneer te gebruiken: voor rollenspellen of om je voor te bereiden op moeilijke gesprekken.</div>
+            <div class="prompt-example">Reageer als een boze en zenuwachtige cliënt die de procesrisico's te laat tot zich heeft door laten dringen. Geef vervolgens een advies hoe diens advocaat zijn/haar eigen positie kan bewaken, maar ook goed kan adviseren.</div>
+        </div>
+
+        <div class="technique-box">
+            <div class="technique-title">8. Persona prompting 3 – compliance officer <span class="badge badge-intermediate">Gemiddeld</span></div>
+            <div class="technique-description">Wanneer te gebruiken: voor risicoanalyses vanuit een specifiek perspectief.</div>
+            <div class="prompt-example">Denk als een compliance officer: welke regulatory risico's zie je?</div>
+        </div>
+
+        <div class="technique-box">
+            <div class="technique-title">9. Brainstorm prompting 1 – team & verandering <span class="badge badge-beginner">Beginner</span></div>
+            <div class="technique-description">Wanneer te gebruiken: voor creatieve ideegeneratie zonder directe besluitvorming.</div>
+            <div class="prompt-example">Brainstorm verschillende manieren om het team mee te krijgen in de volgende verandering: [voeg beschrijving verandering in].
+
+Ik vind empatisch leiderschap en actiegerichtheid belangrijk, keuzes maken we later.</div>
+            
+            <div class="dos-donts-grid">
+                <div class="dos-box">
+                    <h4>✅ Do's</h4>
+                    <ul>
+                        <li>Vraag expliciet om brainstormen</li>
+                        <li>Stel beslissing uit</li>
+                        <li>Moedig creativiteit aan</li>
+                    </ul>
+                </div>
+                <div class="donts-box">
+                    <h4>❌ Don'ts</h4>
+                    <ul>
+                        <li>Niet meteen om beslissing vragen</li>
+                        <li>Geen beperkende criteria stellen</li>
+                        <li>Niet kritisch zijn in deze fase</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="technique-box">
+            <div class="technique-title">10. Brainstorm prompting 2 – dienstdifferentiatie <span class="badge badge-beginner">Beginner</span></div>
+            <div class="technique-description">Wanneer te gebruiken: voor strategische verkenning van mogelijkheden.</div>
+            <div class="prompt-example">Brainstorm hoe we deze dienst verder kunnen onderscheiden t.o.v concurrent X. Maak geen beslissingen, geef alleen ideeën.</div>
+        </div>
+
+        <div class="technique-box">
+            <div class="technique-title">11. Brainstorm prompting 3 – juridische benadering <span class="badge badge-beginner">Beginner</span></div>
+            <div class="technique-description">Wanneer te gebruiken: voor het verkennen van juridische opties voordat je een strategie bepaalt.</div>
+            <div class="prompt-example">Brainstorm juridische mogelijkheden voor dit geschil. Denk breed en creatief, haalbaarheid komt later.</div>
+        </div>
+    </section>
+
+    <section id="prompttactieken">
+        <h2>Prompttactieken</h2>
+        <p>Deze tactieken helpen je om de output van AI te sturen door specifieke instructies te geven over toon, publiek en structuur.</p>
+
+        <h3>Audience specification & tone setting</h3>
+
+        <div class="technique-box">
+            <div class="technique-title">12. Informele uitnodiging per (Whats)app <span class="badge badge-beginner">Beginner</span></div>
+            <div class="technique-description">Wanneer te gebruiken: voor informele communicatie waarbij je een specifieke toon wilt zetten.</div>
+            <div class="prompt-example">Toon: vriendelijk, informeel, met een knipoog.
+Taalgebruik: spreektaal, korte zinnen, emoji's beperkt toegestaan.</div>
+        </div>
+
+        <div class="technique-box">
+            <div class="technique-title">13. Brief namens een VvE aan bewoners <span class="badge badge-beginner">Beginner</span></div>
+            <div class="technique-description">Wanneer te gebruiken: voor formele maar toegankelijke communicatie.</div>
+            <div class="prompt-example">Toon: zakelijk en informatief, neutraal, beleefd, wel aanzetten tot besluit.
+Taalgebruik: helder, menselijk, zonder vakjargon.</div>
+        </div>
+
+        <h3>Output constraints</h3>
+
+        <div class="technique-box">
+            <div class="technique-title">14. Professioneel – executive summary <span class="badge badge-intermediate">Gemiddeld</span></div>
+            <div class="technique-description">Wanneer te gebruiken: voor heldere, bondige professionele documenten.</div>
+            <div class="prompt-example">Schrijf als executive summary in max. 500 woorden met bondige alinea's, geef heldere tussenkoppen en sluit af met advies.</div>
+        </div>
+
+        <div class="technique-box">
+            <div class="technique-title">15. Presentatie klaar – slide-vorm <span class="badge badge-intermediate">Gemiddeld</span></div>
+            <div class="technique-description">Wanneer te gebruiken: voor presentaties waarbij je directe slidestructuur wilt.</div>
+            <div class="prompt-example">Schrijf in slide-vorm: max 30 woorden per slide, voornamelijk in bullets, iedere slide moet een titel en toelichtende subtitel bevatten.</div>
+        </div>
+
+        <div class="technique-box">
+            <div class="technique-title">16. Verhalend – met anekdotes <span class="badge badge-intermediate">Gemiddeld</span></div>
+            <div class="technique-description">Wanneer te gebruiken: voor meer engaging en memorabele communicatie.</div>
+            <div class="prompt-example">Leg het uit aan een collega in de vorm van een prikkelend verhaal met anekdotes en een sterke punchline aan het eind.</div>
+        </div>
+
+        <div class="technique-box">
+            <div class="technique-title">17. Constraint layering – risk & IT <span class="badge badge-advanced">Gevorderd</span></div>
+            <div class="technique-description">Wanneer te gebruiken: voor complexe analyses waarbij je meerdere constraints wilt toepassen.</div>
+            <div class="prompt-example">Geef een praktisch advies over documentbeveiliging en toegangsbeheer in onze werkomgeving.
+
+- Structuur: drie onderdelen: risico's, best practices, aanbevelingen.
+- Format: tabel met kwetsbaarheid, impact, mitigerende maatregel.
+- Framework: CIA-triad: vertrouwelijkheid, integriteit, beschikbaarheid.
+- Lengte: max. 1000 woorden.
+- Taal: technisch, helder, zonder juridisch of audit-jargon.
+- Focus: rolgebaseerde toegang, versleuteling, datastructuur in gedeelde drives.
+- Afsluiting: eindig met 3 direct uitvoerbare acties.</div>
+            
+            <div class="dos-donts-grid">
+                <div class="dos-box">
+                    <h4>✅ Do's</h4>
+                    <ul>
+                        <li>Specificeer meerdere dimensies</li>
+                        <li>Wees consistent in constraints</li>
+                        <li>Geef duidelijke prioriteiten</li>
+                    </ul>
+                </div>
+                <div class="donts-box">
+                    <h4>❌ Don'ts</h4>
+                    <ul>
+                        <li>Geen tegenstrijdige eisen</li>
+                        <li>Niet te veel constraints (max 7-8)</li>
+                        <li>Geen onrealistische combinaties</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="technique-box">
+            <div class="technique-title">18. Chunking – analyse van zorgbeleidsdocument <span class="badge badge-intermediate">Gemiddeld</span></div>
+            <div class="technique-description">Wanneer te gebruiken: voor zeer lange documenten die je systematisch wilt verwerken.</div>
+            <div class="prompt-example">- Dit beleidsdocument is erg lang, 125 pagina's.
+- Analyseer het per hoofdstuk en vat de kernpunten samen.
+- Benoem juridische implicaties, met focus op governance en naleving.
+- Noem opvallende inzichten, cijfers of strategisch relevante trends.
+- Verwerk mijn wedervragen waar nodig.
+- Ga pas verder als ik 'Volgende' typ.
+- Sluit af met risico's en strategische aandachtspunten voor de cliënt.</div>
+            
+            <div class="dos-donts-grid">
+                <div class="dos-box">
+                    <h4>✅ Do's</h4>
+                    <ul>
+                        <li>Deel lange documenten op</li>
+                        <li>Geef duidelijke stop-momenten</li>
+                        <li>Vraag om samenvatting per deel</li>
+                    </ul>
+                </div>
+                <div class="donts-box">
+                    <h4>❌ Don'ts</h4>
+                    <ul>
+                        <li>Geen te grote chunks (>50 pagina's)</li>
+                        <li>Niet te kleine chunks (<5 pagina's)</li>
+                        <li>Geen inconsistente opdeling</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="frameworks">
+        <h2>Juridische & taalframeworks</h2>
+        <p>Gevestigde frameworks uit de juridische en communicatieve wereld die je kunt gebruiken om structuur aan te brengen in je prompts.</p>
+
+        <h3>Juridische frameworks</h3>
+
+        <div class="framework-box">
+            <div class="framework-title">19. IRAC – Juridische analyse</div>
+            <p style="font-style: italic; margin: 5pt 0;">Issue, Rule, Application, Conclusion</p>
+            <p>Standaard voor juridische analyses: identificeer het probleem, bepaal de regel, pas toe en trek conclusie.</p>
+            <div class="prompt-example">Analyseer deze zaak volgens het IRAC-framework:
+1. Issue: Wat is de juridische vraag?
+2. Rule: Welke wettelijke regels zijn van toepassing?
+3. Application: Hoe passen deze regels op deze specifieke feiten?
+4. Conclusion: Wat is de juridische conclusie?</div>
+        </div>
+
+        <div class="framework-box">
+            <div class="framework-title">DGR – Juridisch advies</div>
+            <p style="font-style: italic; margin: 5pt 0;">Deugdelijk, Gemotiveerd, Rechtskundig advies</p>
+            <p>Framework voor het geven van kwalitatief juridisch advies met goede onderbouwing.</p>
+        </div>
+
+        <div class="framework-box">
+            <div class="framework-title">SATO – Juridische stellingname</div>
+            <p style="font-style: italic; margin: 5pt 0;">Standpunt, Argument, Tegenargument, Oordeel</p>
+            <p>Voor het opbouwen van juridische argumentatie met aandacht voor tegenwerpingen.</p>
+        </div>
+
+        <div class="framework-box">
+            <div class="framework-title">MECE – Juridische structurering</div>
+            <p style="font-style: italic; margin: 5pt 0;">Mutually Exclusive, Collectively Exhaustive</p>
+            <p>Zorg dat je analyse volledig is en geen overlap heeft tussen categorieën.</p>
+        </div>
+
+        <h3>Algemene taalframeworks</h3>
+
+        <div class="framework-box">
+            <div class="framework-title">20. ELI5 – Toegankelijke uitleg</div>
+            <p style="font-style: italic; margin: 5pt 0;">Explain Like I'm 5</p>
+            <p>Leg complexe materie uit op begrijpelijke wijze, zonder te simplificeren.</p>
+            <div class="prompt-example">Leg het concept van aansprakelijkheid bij productdefecten uit alsof je het aan iemand uitlegt zonder juridische achtergrond. Gebruik heldere taal en concrete voorbeelden.</div>
+        </div>
+
+        <div class="framework-box">
+            <div class="framework-title">5W1H – Feitelijke analyse</div>
+            <p style="font-style: italic; margin: 5pt 0;">Who, What, When, Where, Why, How</p>
+            <p>Zorg dat alle relevante vragen beantwoord worden in je analyse.</p>
+        </div>
+
+        <div class="framework-box">
+            <div class="framework-title">WHY, HOW, WHAT – Overtuigende opbouw</div>
+            <p style="font-style: italic; margin: 5pt 0;">Bekend van Simon Sinek</p>
+            <p>Begin met het waarom, vervolg met hoe, eindig met wat. Effectief voor strategische communicatie.</p>
+        </div>
+
+        <div class="framework-box">
+            <div class="framework-title">21. SCQA – Probleemanalyse <span class="badge badge-intermediate">Gemiddeld</span></div>
+            <p style="font-style: italic; margin: 5pt 0;">Situation, Complication, Question, Answer</p>
+            <p>Framework voor het gestructureerd aanpakken van complexe juridische vraagstukken. Helpt om van een brede situatie naar een concrete oplossing te komen.</p>
+            
+            <div class="prompt-example">Analyseer deze juridische kwestie volgens het SCQA-framework:
+
+<strong>Situation:</strong> Schets de huidige situatie en context. Wat is de achtergrond?
+
+<strong>Complication:</strong> Wat is het probleem of de complicatie? Waarom is dit een uitdaging?
+
+<strong>Question:</strong> Wat is de specifieke vraag die beantwoord moet worden?
+
+<strong>Answer:</strong> Wat is jouw advies of oplossing, inclusief onderbouwing?</div>
+
+            <div class="dos-donts-grid">
+                <div class="dos-box">
+                    <h4>✅ Do's</h4>
+                    <ul>
+                        <li>Begin breed met situatieschets</li>
+                        <li>Identificeer het echte probleem</li>
+                        <li>Formuleer een scherpe vraag</li>
+                        <li>Geef een onderbouwd antwoord</li>
+                    </ul>
+                </div>
+                <div class="donts-box">
+                    <h4>❌ Don'ts</h4>
+                    <ul>
+                        <li>Niet meteen naar antwoord springen</li>
+                        <li>Geen onduidelijke probleemstelling</li>
+                        <li>Niet de vraag overslaan</li>
+                        <li>Geen antwoord zonder onderbouwing</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="combinatietechnieken">
+        <h2>Combinatietechnieken</h2>
+        <p>De kracht van prompting komt vaak uit het slim combineren van technieken. Hier zie je effectieve combinaties voor specifieke juridische toepassingen.</p>
+
+        <div class="card">
+            <div class="card-header">💪 Krachtige combinaties voor juridisch werk</div>
+            
+            <h3>Combinatie 1: Few Shot + Chain of Thought</h3>
+            <p><strong>Wanneer:</strong> Complex juridisch document analyseren met consistente output</p>
+            <p><strong>Waarom:</strong> Few shot zorgt voor consistente format, Chain of thought voor diepgaande analyse</p>
+            <div class="prompt-example">Hier zie je hoe ik contractclausules analyseer:
+
+<strong>Voorbeeld 1:</strong>
+Clausule: "Partijen komen overeen dat..."
+Analyse stap 1: Identificatie - dit is een wederzijdse afspraak
+Analyse stap 2: Rechtsgrond - art. 6:217 BW (overeenkomst)
+Analyse stap 3: Risico - geen, standaard formulering
+Conclusie: Clausule is rechtsgeldig
+
+Analyseer nu de volgende clausule op dezelfde manier, stap voor stap: [clausule]</div>
+        </div>
+
+        <div class="card">
+            <h3>Combinatie 2: Persona + IRAC Framework</h3>
+            <p><strong>Wanneer:</strong> Juridisch advies vanuit specifiek perspectief</p>
+            <p><strong>Waarom:</strong> Persona geeft expertise-niveau, IRAC zorgt voor gestructureerde analyse</p>
+            <div class="prompt-example">Je bent een ervaren procesadvocaat gespecialiseerd in verbintenissenrecht. Analyseer deze zaak volgens het IRAC-framework:
+
+Issue: [juridische vraag]
+Rule: Welke artikelen en jurisprudentie zijn relevant?
+Application: Hoe past dit op de feiten?
+Conclusion: Wat is je procesadvies?</div>
+        </div>
+
+        <div class="card">
+            <h3>Combinatie 3: Step Back + Devil's Advocate</h3>
+            <p><strong>Wanneer:</strong> Strategische beslissing nemen met risicobewustzijn</p>
+            <p><strong>Waarom:</strong> Step back geeft context, Devil's advocate identificeert zwakke plekken</p>
+            <div class="prompt-example">Voordat je dit juridisch advies geeft, neem eerst een stap terug:
+- Wat zijn de bredere strategische implicaties?
+- Wat zijn de onderliggende belangen van alle partijen?
+
+Geef vervolgens je advies, maar speel daarna de devil's advocate:
+- Welke aannames zijn mogelijk te optimistisch?
+- Welke risico's zijn mogelijk onderschat?
+- Wat kan er misgaan met deze strategie?</div>
+        </div>
+
+        <div class="card">
+            <h3>Combinatie 4: Questions Up Front + Stage Gating</h3>
+            <p><strong>Wanneer:</strong> Complex dossier opbouwen waarbij je nog niet alle info hebt</p>
+            <p><strong>Waarom:</strong> Questions up front verzamelt info, Stage gating zorgt voor gefaseerde verwerking</p>
+            <div class="prompt-example">Help me dit geschil analyseren. Stel me eerst 5 cruciale vragen die je nodig hebt om een goed advies te geven.
+
+Verwerk mijn antwoorden gefaseerd:
+1. Na mijn eerste antwoorden: stel vervolgvragen
+2. Na alle info: maak een feitenmatrix
+3. Na mijn akkoord: doe een juridische analyse
+4. Na mijn feedback: geef een definitief advies
+
+Ga pas naar de volgende fase als ik "Ga verder" zeg.</div>
+        </div>
+
+        <div class="card">
+            <h3>Combinatie 5: Chunking + Confirm-and-Continue + MECE</h3>
+            <p><strong>Wanneer:</strong> Lang contract of document volledig en gestructureerd analyseren</p>
+            <p><strong>Waarom:</strong> Chunking maakt het behapbaar, Confirm-and-continue geeft controle, MECE zorgt voor volledigheid</p>
+            <div class="prompt-example">Analyseer dit 80-pagina's tellende samenwerkingscontract systematisch:
+
+- Verdeel het in logische secties (MECE-principe: geen overlap, wel volledig)
+- Analyseer per sectie: kernpunten, risico's, aandachtspunten
+- Wacht na elke sectie op mijn akkoord voordat je verder gaat
+- Maak aan het eind een volledig overzicht van alle bevindingen
+
+Begin met het voorstellen van een logische sectionering.</div>
+        </div>
+
+        <div class="card">
+            <h3>Combinatie 6: Output Constraints + Audience + Framework</h3>
+            <p><strong>Wanneer:</strong> Cliëntcommunicatie over complex juridisch advies</p>
+            <p><strong>Waarom:</strong> Zorgt voor toegankelijk maar compleet advies</p>
+            <div class="prompt-example">Schrijf een adviesbrief aan een cliënt over de juridische haalbaarheid van dit geschil.
+
+Publiek: Ondernemer zonder juridische achtergrond, wel bedrijfsmatig slim
+Toon: Professioneel maar toegankelijk, zonder juridisch jargon
+Lengte: Max 2 A4'tjes (±1000 woorden)
+Structuur: Gebruik WHY-HOW-WHAT framework (waarom relevant, hoe aanpakken, wat doen)
+Format: 
+- Korte samenvatting bovenaan (3 bullets)
+- Duidelijke tussenkoppen
+- Concrete vervolgstappen aan het eind</div>
+        </div>
+
+        <div class="success-box">
+            <p><strong>💡 Tip voor combinaties:</strong> Begin met 2-3 technieken en bouw op. Te veel technieken tegelijk kan de prompt onduidelijk maken. Test wat werkt en verfijn iteratief.</p>
+        </div>
+    </section>
+
+    <section id="conversational">
+        <h2>Conversational prompting</h2>
+        <p>Technieken om de AI interactief te laten werken, door validatie, vragen en stapsgewijze aanpak.</p>
+
+        <div class="technique-box">
+            <div class="technique-title">22. Task validation <span class="badge badge-beginner">Beginner</span></div>
+            <div class="technique-description">Wanneer te gebruiken: om te controleren of de AI je opdracht goed begrijpt voordat deze aan de slag gaat.</div>
+            <div class="prompt-example">&lt;prompt...&gt;
+
+Voordat je aan de slag gaat, vertel mij eerst wat mijn opdracht aan jou is en wat ik als resultaat verwacht.</div>
+            
+            <div class="dos-donts-grid">
+                <div class="dos-box">
+                    <h4>✅ Do's</h4>
+                    <ul>
+                        <li>Vraag om herhaling van opdracht</li>
+                        <li>Laat verwachtingen bevestigen</li>
+                        <li>Gebruik bij complexe opdrachten</li>
+                    </ul>
+                </div>
+                <div class="donts-box">
+                    <h4>❌ Don'ts</h4>
+                    <ul>
+                        <li>Niet bij hele simpele vragen</li>
+                        <li>Geen validatie zonder correctie</li>
+                        <li>Niet overslaan bij onduidelijkheid</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="technique-box">
+            <div class="technique-title">23. Questions up front – bedrijfsovername <span class="badge badge-intermediate">Gemiddeld</span></div>
+            <div class="technique-description">Wanneer te gebruiken: als je zelf nog niet alle relevante informatie hebt, maar de AI kan helpen de juiste vragen te stellen.</div>
+            <div class="prompt-example">Help me deze bedrijfsovername goed doordenken door me vooraf de juiste vragen te stellen. Begin met wat jij denkt dat de kernvraag is in deze deal.</div>
+        </div>
+
+        <div class="technique-box">
+            <div class="technique-title">24. Questions up front – weekendje weg <span class="badge badge-beginner">Beginner</span></div>
+            <div class="technique-description">Wanneer te gebruiken: voor niet-juridische toepassingen waarbij je wilt dat de AI relevante context verzamelt.</div>
+            <div class="prompt-example">Help me een verrassend weekendje weg voor met mijn partner te bedenken in een grote stad in het buitenland die we goed met de trein kunnen bereizen, vrijdag t/m zondag. Begin met 5 relevante vragen.</div>
+        </div>
+
+        <div class="technique-box">
+            <div class="technique-title">25. Combinatie: validatie én vragen <span class="badge badge-intermediate">Gemiddeld</span></div>
+            <div class="technique-description">Wanneer te gebruiken: voor complexe opdrachten waarbij je beide technieken combineert.</div>
+            <div class="prompt-example"><strong>Prompt 1:</strong> Voordat je aan de slag gaat, vertel me nu eerst wat mijn opdracht aan jou is en wat ik als resultaat verwacht.
+
+<strong>Prompt 2:</strong> Vertel me welke informatie je van mij nodig hebt om de taak zo goed mogelijk uit te voeren.</div>
+        </div>
+
+        <div class="technique-box">
+            <div class="technique-title">26. Step by step – huurgeschil <span class="badge badge-intermediate">Gemiddeld</span></div>
+            <div class="technique-description">Wanneer te gebruiken: voor analyses die je in meerdere stappen wilt uitvoeren met tussentijdse controle.</div>
+            <div class="prompt-example"><strong>Prompt 1:</strong> Identificeer de kernvragen in dit huurgeschil.
+
+<strong>Prompt 2:</strong> Welke artikelen uit boek 6 & 7 van het BW zijn hierop van toepassing?
+
+<strong>Prompt 3:</strong> Pas deze artikelen toe op de feiten en geef een voorlopige conclusie.</div>
+        </div>
+
+        <div class="technique-box">
+            <div class="technique-title">27. Confirm-and-continue <span class="badge badge-intermediate">Gemiddeld</span></div>
+            <div class="technique-description">Wanneer te gebruiken: als je per onderdeel wilt kunnen bijsturen en goedkeuren.</div>
+            <div class="prompt-example">- Analyseer &lt;bestemmingsplan.pdf&gt; op afwijkingsmogelijkheden voor &lt;bouwproject.pdf&gt;.
+- Stop na elke relevante passage en wacht op akkoord van mij op je analyse.
+- Als alles geanalyseerd is, geef een overzichtelijke samenvatting.</div>
+            
+            <div class="dos-donts-grid">
+                <div class="dos-box">
+                    <h4>✅ Do's</h4>
+                    <ul>
+                        <li>Geef duidelijke stop-momenten</li>
+                        <li>Wacht echt op bevestiging</li>
+                        <li>Maak samenvattingen tussendoor</li>
+                    </ul>
+                </div>
+                <div class="donts-box">
+                    <h4>❌ Don'ts</h4>
+                    <ul>
+                        <li>Niet te veel stop-momenten</li>
+                        <li>Geen onduidelijke checkpoints</li>
+                        <li>Niet doorgaan zonder akkoord</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="technique-box">
+            <div class="technique-title">28. Stage gating <span class="badge badge-advanced">Gevorderd</span></div>
+            <div class="technique-description">Wanneer te gebruiken: voor projecten waarbij je gefaseerd informatie wilt aanleveren.</div>
+            <div class="prompt-example">Help me onze zomervakantie plannen. Ik geef je stapsgewijs onze voorkeuren. Stel gerust verduidelijkende vragen tussendoor, maar wacht met een voorstel tot je alle input compleet hebt.</div>
+        </div>
+
+        <div class="technique-box">
+            <div class="technique-title">29. Progressive prompting <span class="badge badge-intermediate">Gemiddeld</span></div>
+            <div class="technique-description">Wanneer te gebruiken: om je prompt iteratief te verbeteren tot je het gewenste resultaat hebt.</div>
+            <div class="prompt-example">1. Analyseer de reactie van de AI op een prompt.
+2. Gebruik delen daaruit om je prompt te verbeteren.
+3. Voeg extra technieken en tactieken toe.
+4. Totdat je de perfecte prompt hebt!</div>
+        </div>
+    </section>
+
+    <section id="reflective">
+        <h2>Reflective prompting</h2>
+        <p>Technieken om de AI kritisch te laten nadenken over zijn eigen output en verschillende perspectieven te verkennen.</p>
+
+        <div class="technique-box">
+            <div class="technique-title">30. Rationale prompting <span class="badge badge-intermediate">Gemiddeld</span></div>
+            <div class="technique-description">Wanneer te gebruiken: als je wilt dat de AI zijn redenering transparant maakt.</div>
+            <div class="prompt-example">Leg per stap uit, vraag bijv:
+- Waar baseer je dit op?
+- Waarom past dit hier?
+- Wat zou een ander zeggen?</div>
+        </div>
+
+        <div class="technique-box">
+            <div class="technique-title">31. Explain reasoning – professionele context <span class="badge badge-intermediate">Gemiddeld</span></div>
+            <div class="technique-description">Wanneer te gebruiken: voor diepere analyse van de onderbouwing.</div>
+            <div class="prompt-example">- Waar baseer je dit advies precies op?
+- Wat zijn mogelijke alternatieven die je hebt overwogen?
+- Welke aannames liggen onder je conclusie?</div>
+        </div>
+
+        <div class="technique-box">
+            <div class="technique-title">32. Explain reasoning – juridische voorbeelden <span class="badge badge-beginner">Beginner</span></div>
+            <div class="technique-description">Wanneer te gebruiken: om juridische termen en concepten te verduidelijken.</div>
+            <div class="prompt-example">- Wat bedoel je precies met verhaalsmogelijkheden?
+- Welke wetsartikelen vallen onder deze relevante wetgeving?
+- Wat wordt hier verstaan onder een redelijke termijn?</div>
+        </div>
+
+        <div class="technique-box">
+            <div class="technique-title">33. Perspectiefwisseling <span class="badge badge-intermediate">Gemiddeld</span></div>
+            <div class="technique-description">Wanneer te gebruiken: om alle betrokken partijen te begrijpen in een conflict of onderhandeling.</div>
+            <div class="prompt-example">Analyseer dit conflict afzonderlijk vanuit de grootaandeelhouders, de kleinere aandeelhouders en het bestuur.</div>
+            
+            <div class="dos-donts-grid">
+                <div class="dos-box">
+                    <h4>✅ Do's</h4>
+                    <ul>
+                        <li>Vraag om elk perspectief apart</li>
+                        <li>Laat belangen identificeren</li>
+                        <li>Vergelijk perspectieven aan het eind</li>
+                    </ul>
+                </div>
+                <div class="donts-box">
+                    <h4>❌ Don'ts</h4>
+                    <ul>
+                        <li>Niet alle perspectieven door elkaar</li>
+                        <li>Geen bias naar één perspectief</li>
+                        <li>Niet alleen oppervlakkig bekijken</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="technique-box">
+            <div class="technique-title">34. Alternatieve interpretatie <span class="badge badge-intermediate">Gemiddeld</span></div>
+            <div class="technique-description">Wanneer te gebruiken: om onderliggende motivaties en werkelijke belangen te onderzoeken.</div>
+            <div class="prompt-example">Gaat het vooral om macht en invloed, of verschillen ze echt van mening over waar het bedrijf naartoe moet?</div>
+        </div>
+
+        <div class="technique-box">
+            <div class="technique-title">35. Compare answers <span class="badge badge-intermediate">Gemiddeld</span></div>
+            <div class="technique-description">Wanneer te gebruiken: om verschillende juridische strategieën systematisch te vergelijken.</div>
+            <div class="prompt-example">Geef twee manieren om dit geschil over bouwvertraging aan te pakken:
+
+1. Contractuele boetebepaling inroepen.
+2. Schadevergoeding vorderen op grond van wanprestatie.
+
+Vergelijk beide op juridische haalbaarheid, financiële gevolgen, risico's en succeskans.</div>
+            
+            <div class="dos-donts-grid">
+                <div class="dos-box">
+                    <h4>✅ Do's</h4>
+                    <ul>
+                        <li>Geef duidelijke vergelijkingscriteria</li>
+                        <li>Vraag om voor- en nadelen</li>
+                        <li>Laat een conclusie trekken</li>
+                    </ul>
+                </div>
+                <div class="donts-box">
+                    <h4>❌ Don'ts</h4>
+                    <ul>
+                        <li>Niet te veel opties (max 3-4)</li>
+                        <li>Geen onduidelijke criteria</li>
+                        <li>Niet zonder conclusie/advies</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="technique-box">
+            <div class="technique-title">36. Bias-awareness & critical reflection <span class="badge badge-advanced">Gevorderd</span></div>
+            <div class="technique-description">Wanneer te gebruiken: om aannames en mogelijke vooroordelen in analyses te identificeren.</div>
+            <div class="prompt-example">- Welke aannames maak je over het gedrag van de ondernemer?
+- Zijn die aannames eerlijk en juridisch goed onderbouwd?
+- Is er ruimte voor een andere lezing?</div>
+        </div>
+
+        <div class="technique-box">
+            <div class="technique-title">37. Devil's advocate prompting <span class="badge badge-advanced">Gevorderd</span></div>
+            <div class="technique-description">Wanneer te gebruiken: om zwakke plekken in je strategie of advies te identificeren.</div>
+            <div class="prompt-example">Bekijk dit advies voor herstructurering:
+
+- Welke risico's zijn onderschat of te optimistisch?
+- Wie zou bezwaar kunnen maken, en op welke gronden?
+- Welk relevant scenario is nog niet meegenomen?</div>
+            
+            <div class="dos-donts-grid">
+                <div class="dos-box">
+                    <h4>✅ Do's</h4>
+                    <ul>
+                        <li>Vraag expliciet om kritische blik</li>
+                        <li>Laat zwakke punten identificeren</li>
+                        <li>Vraag om tegenargumenten</li>
+                    </ul>
+                </div>
+                <div class="donts-box">
+                    <h4>❌ Don'ts</h4>
+                    <ul>
+                        <li>Niet defensief worden</li>
+                        <li>Geen kritiek negeren</li>
+                        <li>Niet alleen bevestiging zoeken</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="hulpmiddelen">
+        <h2>Praktische hulpmiddelen</h2>
+
+        <div class="technique-box">
+            <div class="technique-title">38. Voetnoten assistent <span class="badge badge-beginner">Beginner</span></div>
+            <div class="technique-description">Wanneer te gebruiken: voor het correct citeren volgens juridische standaarden.</div>
+            <div class="prompt-example">Je bent een juridische assistent voor het maken van voetnoten. Je gebruikt de kennis in de bijgevoegde 'Leidraad voor juridische auteurs' om voetnoten voor mij te maken. Wanneer een gebruiker aan je vraagt om een voetnoot te maken, vraag je eerste uit welke bron de gebruiker wil citeren.</div>
+        </div>
+
+        <div class="technique-box">
+            <div class="technique-title">39. Juridische onderzoeksassistent (letselschade door OD) <span class="badge badge-advanced">Gevorderd</span></div>
+            <div class="technique-description">Wanneer te gebruiken: voor systematisch juridisch onderzoek met meerdere stappen.</div>
+            <p><strong>Stap 1 - Eerste analyse:</strong></p>
+            <div class="prompt-example">Je bent een jurist die onderzoek doet naar een rechtszaak. Je staat de eisende partij bij die letselschade heeft geleden door een onrechtmatige daad.
+
+Output die ik verlang:
+- Samenvatting van de feiten (beknopt).
+- Samenvatting van het procesverloop.
+- De rechtsregels (zo uitgebreid mogelijk uit het artikel).
+- Welke wetten van toepassing zijn.
+- In bullets weergeven.</div>
+
+            <p><strong>Stap 2 - Analyseer en controleer:</strong></p>
+            <div class="prompt-example">Waar heb je de rechtsregels in het arrest gevonden? Welke feiten horen bij de rechtsregels? Geef per rechtsregel een concreet voorbeeld. Presenteer in een tabel met kolommen: Rechtsregel | Vindplaats | Feiten | Voorbeeld.</div>
+
+            <p><strong>Stap 3 - Opstellen dagvaarding:</strong></p>
+            <div class="prompt-example">Rol: Je staat de eisende partij bij. Je bent feiten gedreven en kunt krachtige argumenten formuleren.
+
+Taak: de rechter overtuigen van een onrechtmatige daad.
+
+Output: Volledige conceptversie dagvaarding, opgebouwd volgens IRAC, feiten gedreven, juridisch onderbouwd.</div>
+
+            <p><strong>Stap 4 - Beide perspectieven:</strong></p>
+            <div class="prompt-example">Bekijk de zaak kritisch vanuit beide partijen. Stel vragen die een advocaat van de gedaagde zou stellen. Benoem denkbare verweren. Leg uit hoe je elk verweer kunt weerleggen. Presenteer in tabellen.</div>
+        </div>
+    </section>
+
+    <section id="quick-reference">
+        <h2>Quick reference</h2>
+        <p>Overzicht van alle promptingtechnieken voor snel naslagwerk:</p>
+
+        <table>
+            <tr>
+                <th>Techniek</th>
+                <th>Omschrijving</th>
+                <th>Niveau</th>
+            </tr>
+            <tr>
+                <td><strong>Single shot</strong></td>
+                <td>Directe vraag zonder voorbeelden</td>
+                <td><span class="badge badge-beginner">Beginner</span></td>
+            </tr>
+            <tr>
+                <td><strong>Few shot</strong></td>
+                <td>Met voorbeelden van gewenste output</td>
+                <td><span class="badge badge-beginner">Beginner</span></td>
+            </tr>
+            <tr>
+                <td><strong>Chained prompts</strong></td>
+                <td>Meerdere stappen achter elkaar</td>
+                <td><span class="badge badge-intermediate">Gemiddeld</span></td>
+            </tr>
+            <tr>
+                <td><strong>Chain of thought</strong></td>
+                <td>Vraag om stapsgewijze redenering</td>
+                <td><span class="badge badge-intermediate">Gemiddeld</span></td>
+            </tr>
+            <tr>
+                <td><strong>Step back</strong></td>
+                <td>Eerst bredere principes identificeren</td>
+                <td><span class="badge badge-intermediate">Gemiddeld</span></td>
+            </tr>
+            <tr>
+                <td><strong>Persona</strong></td>
+                <td>Geef de AI een specifieke rol</td>
+                <td><span class="badge badge-beginner">Beginner</span></td>
+            </tr>
+            <tr>
+                <td><strong>Brainstorm</strong></td>
+                <td>Ideeën genereren zonder beslissing</td>
+                <td><span class="badge badge-beginner">Beginner</span></td>
+            </tr>
+            <tr>
+                <td><strong>Audience & tone</strong></td>
+                <td>Specificeer doelgroep en stijl</td>
+                <td><span class="badge badge-beginner">Beginner</span></td>
+            </tr>
+            <tr>
+                <td><strong>Output constraints</strong></td>
+                <td>Beperk lengte, vorm of structuur</td>
+                <td><span class="badge badge-intermediate">Gemiddeld</span></td>
+            </tr>
+            <tr>
+                <td><strong>Chunking</strong></td>
+                <td>Deel lange documenten op</td>
+                <td><span class="badge badge-intermediate">Gemiddeld</span></td>
+            </tr>
+            <tr>
+                <td><strong>IRAC</strong></td>
+                <td>Issue, Rule, Application, Conclusion</td>
+                <td><span class="badge badge-intermediate">Gemiddeld</span></td>
+            </tr>
+            <tr>
+                <td><strong>SCQA</strong></td>
+                <td>Situation, Complication, Question, Answer</td>
+                <td><span class="badge badge-intermediate">Gemiddeld</span></td>
+            </tr>
+            <tr>
+                <td><strong>DGR, SATO, MECE</strong></td>
+                <td>Juridische structuur frameworks</td>
+                <td><span class="badge badge-intermediate">Gemiddeld</span></td>
+            </tr>
+            <tr>
+                <td><strong>ELI5, 5W1H</strong></td>
+                <td>Toegankelijke communicatie frameworks</td>
+                <td><span class="badge badge-beginner">Beginner</span></td>
+            </tr>
+            <tr>
+                <td><strong>Combinatietechnieken</strong></td>
+                <td>Meerdere technieken slim samenvoegen</td>
+                <td><span class="badge badge-advanced">Gevorderd</span></td>
+            </tr>
+            <tr>
+                <td><strong>Task validation</strong></td>
+                <td>Laat AI opdracht herhalen</td>
+                <td><span class="badge badge-beginner">Beginner</span></td>
+            </tr>
+            <tr>
+                <td><strong>Questions up front</strong></td>
+                <td>Laat AI relevante vragen stellen</td>
+                <td><span class="badge badge-intermediate">Gemiddeld</span></td>
+            </tr>
+            <tr>
+                <td><strong>Confirm-and-continue</strong></td>
+                <td>Goedkeuring per stap</td>
+                <td><span class="badge badge-intermediate">Gemiddeld</span></td>
+            </tr>
+            <tr>
+                <td><strong>Stage gating</strong></td>
+                <td>Gefaseerde informatievoorziening</td>
+                <td><span class="badge badge-advanced">Gevorderd</span></td>
+            </tr>
+            <tr>
+                <td><strong>Progressive</strong></td>
+                <td>Iteratief verbeteren van prompt</td>
+                <td><span class="badge badge-intermediate">Gemiddeld</span></td>
+            </tr>
+            <tr>
+                <td><strong>Rationale</strong></td>
+                <td>Vraag om onderbouwing</td>
+                <td><span class="badge badge-intermediate">Gemiddeld</span></td>
+            </tr>
+            <tr>
+                <td><strong>Multiple perspectives</strong></td>
+                <td>Verschillende invalshoeken</td>
+                <td><span class="badge badge-intermediate">Gemiddeld</span></td>
+            </tr>
+            <tr>
+                <td><strong>Bias-awareness</strong></td>
+                <td>Identificeer aannames</td>
+                <td><span class="badge badge-advanced">Gevorderd</span></td>
+            </tr>
+            <tr>
+                <td><strong>Devil's advocate</strong></td>
+                <td>Zoek zwakke plekken</td>
+                <td><span class="badge badge-advanced">Gevorderd</span></td>
+            </tr>
+        </table>
+    </section>
+
+    <div style="margin-top: 3rem; padding: 2rem; text-align: center; color: hsl(var(--muted-foreground)); border-top: 1px solid hsl(var(--border));">
+        <p style="margin: 0.5rem 0;">© 2025 - Prompting hand-out voor advocaten</p>
+        <p style="margin: 0.5rem 0; font-size: 0.875rem;">Voor vragen of suggesties, neem contact op.</p>
+    </div>
+</div>
+
+<script>
+// Search functionality
+document.getElementById('searchInput').addEventListener('input', function(e) {
+    const searchTerm = e.target.value.toLowerCase();
+    const sections = document.querySelectorAll('.technique-box, .framework-box, .card, .use-case-card');
+    
+    sections.forEach(section => {
+        const text = section.textContent.toLowerCase();
+        if (text.includes(searchTerm) || searchTerm === '') {
+            section.style.display = '';
+        } else {
+            section.style.display = 'none';
+        }
+    });
+});
+
+// Download HTML function
+function downloadHTML() {
+    const htmlContent = document.documentElement.outerHTML;
+    const blob = new Blob([htmlContent], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'prompting-handout-advocaten.html';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
+
+// Smooth scrolling for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+</script>
+
+</body>
+</html>
