@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompting hand-out voor advocaten</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        border: 'hsl(214.3 31.8% 91.4%)',
+                        primary: {
+                            DEFAULT: 'hsl(221.2 83.2% 53.3%)',
+                            foreground: 'hsl(210 40% 98%)',
+                        },
+                        secondary: {
+                            DEFAULT: 'hsl(210 40% 96.1%)',
+                            foreground: 'hsl(222.2 47.4% 11.2%)',
+                        },
+                        destructive: {
+                            DEFAULT: 'hsl(0 84% 60%)',
+                        },
+                        success: {
+                            DEFAULT: 'hsl(142 71% 45%)',
+                        },
+                        muted: {
+                            foreground: 'hsl(215.4 16.3% 46.9%)',
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @media print {
+            .print\\:hidden {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-900 min-h-screen">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-blue-600 to-blue-700 text-white py-12 px-8 text-center shadow-lg">
+        <h1 class="text-4xl md:text-5xl font-bold mb-3 tracking-tight">
+            Prompting hand-out voor advocaten
+        </h1>
+        <p class="text-lg md:text-xl opacity-90 font-light">
+            Praktische handleiding voor effectieve gebruik van AI-tools door advocaten
+        </p>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Toolbar -->
+        <div class="flex flex-wrap gap-4 mb-8 items-center print:hidden">
+            <div class="flex-1 min-w-[300px] relative">
+                <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Zoek naar technieken, frameworks of toepassingen..."
+                    class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all"
+                />
+            </div>
+            <button
+                onclick="window.print()"
+                class="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors shadow-sm"
+            >
+                📄 Print / Opslaan als PDF
+            </button>
+            <button
+                onclick="downloadHTML()"
+                class="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-200 text-gray-900 rounded-lg text-sm font-medium hover:bg-gray-300 transition-colors"
+            >
+                💾 Download HTML
+            </button>
+        </div>
+
+        <!-- Introduction -->
+        <div class="bg-gradient-to-r from-blue-50 to-blue-100 border-l-4 border-blue-600 rounded-lg p-6 mb-8">
+            <h2 class="text-2xl font-semibold mb-4 text-gray-900">Introductie</h2>
+            <p class="mb-4 text-gray-800 leading-relaxed">
+                Deze handout biedt een overzicht van de belangrijkste promptingtechnieken specifiek voor juridisch werk.
+                Prompting is de kunst van het formuleren van effectieve vragen en opdrachten aan AI-tools. Hoe beter je
+                prompt, hoe relevanter en bruikbaarder de output.
+            </p>
+            <p class="mb-4 text-gray-800 leading-relaxed">
+                Effectief prompting verhoogt de kwaliteit van juridische analyses, bespaart tijd bij documentverwerking
+                en helpt bij het structureren van complexe rechtsvragen. De technieken variëren van eenvoudige instructies
+                tot geavanceerde (conversationele) methoden.
+            </p>
+            <p class="text-gray-800 leading-relaxed">
+                <strong>Hoe gebruik je deze handout?</strong> Begin met de basistechnieken, experimenteer met verschillende
+                tactieken en doe geleidelijk ervaring op. De voorbeelden zijn direct toepasbaar in je dagelijkse praktijk.
+            </p>
+        </div>
+
+        <!-- Warning Box -->
+        <div class="bg-gradient-to-r from-red-50 to-red-100 border-l-4 border-red-600 rounded-lg p-6 mb-8">
+            <div class="flex gap-3 mb-3">
+                <svg class="h-6 w-6 text-red-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                </svg>
+                <p class="font-bold text-red-600 text-lg">
+                    Belangrijke waarschuwing: juridisch onderzoek en hallucinaties
+                </p>
+            </div>
+            <p class="mb-4 text-gray-800 leading-relaxed">
+                AI-tools zoals ChatGPT, Claude en Gemini zijn <strong>niet gemaakt voor juridisch onderzoek. Zij hebben
+                namelijk geen toegang tot rechtsbronnen (zoals actuele Nederlandse wet- en regelgeving of jurisprudentie)</strong>.
+                Bij vragen over specifieke wetsartikelen, uitspraken of regelgeving bestaat een groot risico op
+                <strong>hallucinaties</strong>, de AI verzint dan overtuigend klinkende maar feitelijk onjuiste informatie.
+            </p>
+            <p class="mb-3 font-semibold text-gray-900">Voor betrouwbaar juridisch onderzoek heb je twee opties:</p>
+            <ul class="list-disc pl-6 mb-4 space-y-2 text-gray-800">
+                <li>
+                    Voeg zelf de relevante <strong>wetteksten, jurisprudentie of andere juridische bronnen als bijlage</strong> toe
+                    aan je prompt, zodat de AI alleen kan putten uit betrouwbaar materiaal
+                </li>
+                <li>
+                    Gebruik een <strong>gespecialiseerde juridische AI-tool</strong> die toegang heeft tot actuele juridische
+                    databases (zoals Zeno of Andri)
+                </li>
+            </ul>
+            <p class="font-bold text-gray-900">
+                Vertrouw nooit blind op AI-output bij juridische vragen zonder deze te verifiëren met betrouwbare bronnen.
+            </p>
+        </div>
+
+        <!-- Table of Contents -->
+        <div class="bg-white border border-gray-300 rounded-lg p-6 mb-8 shadow-sm">
+            <h2 class="text-2xl font-semibold mb-6 text-blue-600">Inhoudsopgave</h2>
+            <ol class="space-y-2 list-decimal list-inside text-gray-800">
+                <li><a href="#use-case-index" class="text-blue-600 hover:underline transition-all">Index op juridische use cases</a></li>
+                <li><a href="#best-practices" class="text-blue-600 hover:underline transition-all">Best practices & praktische tips</a></li>
+                <li><a href="#output-validation" class="text-blue-600 hover:underline transition-all">Output validation checklist</a></li>
+                <li><a href="#basistechnieken" class="text-blue-600 hover:underline transition-all">Basistechnieken (1-11)</a></li>
+                <li><a href="#prompttactieken" class="text-blue-600 hover:underline transition-all">Prompttactieken (12-18)</a></li>
+                <li><a href="#frameworks" class="text-blue-600 hover:underline transition-all">Juridische & taalframeworks (19-21)</a></li>
+                <li><a href="#combinatietechnieken" class="text-blue-600 hover:underline transition-all">Combinatietechnieken</a></li>
+                <li><a href="#conversational" class="text-blue-600 hover:underline transition-all">Conversational prompting (22-29)</a></li>
+                <li><a href="#reflective" class="text-blue-600 hover:underline transition-all">Reflective prompting (30-37)</a></li>
+                <li><a href="#hulpmiddelen" class="text-blue-600 hover:underline transition-all">Praktische hulpmiddelen (38-39)</a></li>
+                <li><a href="#quick-reference" class="text-blue-600 hover:underline transition-all">Quick reference</a></li>
+            </ol>
+        </div>
+
+        <!-- Use Case Index -->
+        <section id="use-case-index" class="mb-12">
+            <h2 class="text-3xl font-bold mb-6 text-blue-600 border-b-2 border-gray-300 pb-3">
+                Index op juridische use cases
+            </h2>
+            <p class="mb-6 text-gray-800">Vind snel de juiste techniek voor jouw situatie:</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                <!-- Contractanalyse -->
+                <div class="bg-white border border-gray-300 rounded-lg p-5 transition-all hover:shadow-lg hover:border-blue-600">
+                    <h4 class="text-blue-600 font-semibold text-lg mb-3">📄 Contractanalyse</h4>
+                    <ul class="space-y-1.5 text-sm text-gray-700">
+                        <li>• Few shot prompting (#2)</li>
+                        <li>• Chained prompts (#3)</li>
+                        <li>• Chain of thought (#4)</li>
+                        <li>• Chunking (#18)</li>
+                        <li>• IRAC framework (#19)</li>
+                        <li>• Confirm-and-continue (#26)</li>
+                    </ul>
+                </div>
+
+                <!-- Processtukken -->
+                <div class="bg-white border border-gray-300 rounded-lg p-5 transition-all hover:shadow-lg hover:border-blue-600">
+                    <h4 class="text-blue-600 font-semibold text-lg mb-3">⚖️ Processtukken</h4>
+                    <ul class="space-y-1.5 text-sm text-gray-700">
+                        <li>• Persona prompting (#6-8)</li>
+                        <li>• Chain of thought (#4)</li>
+                        <li>• IRAC framework (#19)</li>
+                        <li>• SATO framework (#19)</li>
+                        <li>• Devil's advocate (#37)</li>
+                        <li>• Juridische onderzoeksassistent (#39)</li>
+                    </ul>
+                </div>
+
+                <!-- Cliëntcommunicatie -->
+                <div class="bg-white border border-gray-300 rounded-lg p-5 transition-all hover:shadow-lg hover:border-blue-600">
+                    <h4 class="text-blue-600 font-semibold text-lg mb-3">💼 Cliëntcommunicatie</h4>
+                    <ul class="space-y-1.5 text-sm text-gray-700">
+                        <li>• Audience specification (#12-13)</li>
+                        <li>• Output constraints (#14-16)</li>
+                        <li>• ELI5 framework (#19)</li>
+                        <li>• WHY-HOW-WHAT framework (#19)</li>
+                        <li>• Persona prompting (#7)</li>
+                    </ul>
+                </div>
+
+                <!-- Juridische analyse -->
+                <div class="bg-white border border-gray-300 rounded-lg p-5 transition-all hover:shadow-lg hover:border-blue-600">
+                    <h4 class="text-blue-600 font-semibold text-lg mb-3">🔍 Juridische analyse</h4>
+                    <ul class="space-y-1.5 text-sm text-gray-700">
+                        <li>• Step back prompting (#5)</li>
+                        <li>• Chain of thought (#4)</li>
+                        <li>• IRAC framework (#19)</li>
+                        <li>• SCQA framework (#21)</li>
+                        <li>• Multiple perspectives (#33-34)</li>
+                        <li>• Compare answers (#35)</li>
+                    </ul>
+                </div>
+
+                <!-- Risicoanalyse -->
+                <div class="bg-white border border-gray-300 rounded-lg p-5 transition-all hover:shadow-lg hover:border-blue-600">
+                    <h4 class="text-blue-600 font-semibold text-lg mb-3">🎯 Risicoanalyse</h4>
+                    <ul class="space-y-1.5 text-sm text-gray-700">
+                        <li>• Persona prompting (#8)</li>
+                        <li>• Devil's advocate (#37)</li>
+                        <li>• Bias-awareness (#36)</li>
+                        <li>• Perspectiefwisseling (#33)</li>
+                        <li>• Constraint layering (#17)</li>
+                    </ul>
+                </div>
+
+                <!-- Strategische verkenning -->
+                <div class="bg-white border border-gray-300 rounded-lg p-5 transition-all hover:shadow-lg hover:border-blue-600">
+                    <h4 class="text-blue-600 font-semibold text-lg mb-3">💡 Strategische verkenning</h4>
+                    <ul class="space-y-1.5 text-sm text-gray-700">
+                        <li>• Brainstorm prompting (#9-11)</li>
+                        <li>• Questions up front (#22-23)</li>
+                        <li>• Step back prompting (#5)</li>
+                        <li>• Compare answers (#35)</li>
+                        <li>• Alternatieve interpretatie (#34)</li>
+                    </ul>
+                </div>
+
+                <!-- Documentverwerking -->
+                <div class="bg-white border border-gray-300 rounded-lg p-5 transition-all hover:shadow-lg hover:border-blue-600">
+                    <h4 class="text-blue-600 font-semibold text-lg mb-3">📋 Documentverwerking</h4>
+                    <ul class="space-y-1.5 text-sm text-gray-700">
+                        <li>• Chunking (#18)</li>
+                        <li>• Chained prompts (#3)</li>
+                        <li>• Stage gating (#28)</li>
+                        <li>• 5W1H framework (#19)</li>
+                        <li>• MECE framework (#19)</li>
+                    </ul>
+                </div>
+
+                <!-- Schrijfopdrachten -->
+                <div class="bg-white border border-gray-300 rounded-lg p-5 transition-all hover:shadow-lg hover:border-blue-600">
+                    <h4 class="text-blue-600 font-semibold text-lg mb-3">✍️ Schrijfopdrachten</h4>
+                    <ul class="space-y-1.5 text-sm text-gray-700">
+                        <li>• Few shot prompting (#2)</li>
+                        <li>• Output constraints (#14-16)</li>
+                        <li>• DGR framework (#19)</li>
+                        <li>• Progressive prompting (#29)</li>
+                        <li>• Voetnoten assistent (#38)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Best Practices -->
+        <section id="best-practices" class="mb-12">
+            <h2 class="text-3xl font-bold mb-6 text-blue-600 border-b-2 border-gray-300 pb-3">
+                Best practices & praktische tips
+            </h2>
+
+            <div class="bg-white border border-gray-300 rounded-lg p-6 mb-6 shadow-sm">
+                <h3 class="text-xl font-semibold mb-4 text-gray-900">Algemene principes voor effectief prompting:</h3>
+                <ul class="space-y-3 text-gray-800">
+                    <li class="flex gap-3">
+                        <svg class="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <div><strong>Wees specifiek en duidelijk</strong> – Vage opdrachten leveren vage resultaten. Benoem precies wat je verwacht.</div>
+                    </li>
+                    <li class="flex gap-3">
+                        <svg class="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <div><strong>Geef context</strong> – Leg uit waarom je iets vraagt en voor wie de output bedoeld is.</div>
+                    </li>
+                    <li class="flex gap-3">
+                        <svg class="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <div><strong>Begin breed, verfijn daarna</strong> – Start met een algemene vraag en zoom in op basis van het antwoord.</div>
+                    </li>
+                    <li class="flex gap-3">
+                        <svg class="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <div><strong>Test en itereer</strong> – Probeer verschillende formuleringen en leer wat het beste werkt.</div>
+                    </li>
+                    <li class="flex gap-3">
+                        <svg class="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <div><strong>Gebruik voorbeelden</strong> – Laat zien hoe je het wilt in plaats van alleen te vertellen.</div>
+                    </li>
+                    <li class="flex gap-3">
+                        <svg class="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <div><strong>Stel grenzen</strong> – Beperk lengte, structuur of focus als dat helpt.</div>
+                    </li>
+                    <li class="flex gap-3">
+                        <svg class="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <div><strong>Valideer de output</strong> – Controleer altijd juridische analyses en bronnen.</div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bg-gradient-to-r from-green-50 to-green-100 border-l-4 border-green-600 rounded-lg p-5 mb-4">
+                <div class="flex gap-3">
+                    <span class="text-2xl flex-shrink-0">💡</span>
+                    <div>
+                        <strong class="text-gray-900">Pro tip:</strong>
+                        <span class="text-gray-800">
+                            Bewaar succesvolle prompts en bouw je eigen bibliotheek op. Wat vandaag werkt, kun je morgen hergebruiken en aanpassen.
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gradient-to-r from-green-50 to-green-100 border-l-4 border-green-600 rounded-lg p-5 mb-4">
+                <div class="flex gap-3">
+                    <span class="text-2xl flex-shrink-0">⚖️</span>
+                    <div>
+                        <strong class="text-gray-900">Juridische context:</strong>
+                        <span class="text-gray-800">
+                            AI-tools zijn geen vervanging voor juridische expertise. Gebruik ze als assistent bij research, structurering
+                            en eerste analyses, maar vertrouw niet blind op de output. Controleer altijd bronnen en conclusies.
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gradient-to-r from-green-50 to-green-100 border-l-4 border-green-600 rounded-lg p-5">
+                <div class="flex gap-3">
+                    <span class="text-2xl flex-shrink-0">🔄</span>
+                    <div>
+                        <strong class="text-gray-900">Iteratief werken:</strong>
+                        <span class="text-gray-800">
+                            Zie prompting als een gesprek, niet als een eenmalige opdracht. Stel vervolgvragen, vraag om verduidelijking
+                            en verfijn stapsgewijs naar het gewenste resultaat.
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <div class="mt-12 pt-8 text-center text-gray-600 border-t border-gray-300">
+            <p class="mb-2">© 2025 - Prompting hand-out voor advocaten</p>
+            <p class="text-sm">Voor vragen of suggesties, neem contact op.</p>
+        </div>
+    </div>
+
+    <script>
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const sections = document.querySelectorAll('.bg-white.border, .bg-gradient-to-r');
+
+            sections.forEach(section => {
+                const text = section.textContent.toLowerCase();
+                if (text.includes(searchTerm) || searchTerm === '') {
+                    section.style.display = '';
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+        });
+
+        // Download HTML function
+        function downloadHTML() {
+            const htmlContent = document.documentElement.outerHTML;
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'prompting-handout-advocaten.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

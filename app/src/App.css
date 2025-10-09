@@ -1,0 +1,20 @@
+/* App-specific styles */
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+@media print {
+  .print\:hidden {
+    display: none !important;
+  }
+  
+  aside, header {
+    display: none !important;
+  }
+  
+  body {
+    background: white !important;
+  }
+}
