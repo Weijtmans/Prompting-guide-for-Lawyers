@@ -1,166 +1,159 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-
 export default function Frameworks() {
-    return (
-        <section id="frameworks" className="mb-12">
-            <h2 className="text-3xl font-bold mb-6 pb-3 border-b">
-                Juridische & taalframeworks
-            </h2>
-            <p className="mb-6 text-muted-foreground">
-                Gevestigde frameworks uit de juridische en communicatieve wereld die je kunt gebruiken om structuur aan te brengen in je prompts.
-            </p>
-
-            <div className="space-y-8">
-                <div>
-                    <h3 className="text-2xl font-semibold mb-4">Juridische frameworks</h3>
-                    <div className="space-y-4">
-                        <Card className="framework-card bg-muted/30 hover:shadow-lg transition-shadow">
-                            <CardHeader>
-                                <CardTitle>19. IRAC – Juridische analyse</CardTitle>
-                                <CardDescription className="italic">
-                                    Issue, Rule, Application, Conclusion
-                                </CardDescription>
-                            </CardHeader>
-                            <CardContent className="space-y-4">
-                                <p>Standaard voor juridische analyses: identificeer het probleem, bepaal de regel, pas toe en trek conclusie.</p>
-                                <div className="bg-muted rounded-lg p-4 border-l-4 border-primary">
-                                    <pre className="whitespace-pre-wrap font-mono text-sm">{`Analyseer deze zaak volgens het IRAC-framework:
+    const legalFrameworks = [
+        {
+            id: 28,
+            title: 'IRAC – Juridische analyse',
+            subtitle: 'Issue, Rule, Application, Conclusion',
+            description: 'Standaard voor juridische analyses: identificeer het probleem, bepaal de regel, pas toe en trek conclusie.',
+            example: `Analyseer deze zaak volgens het IRAC-framework:
 1. Issue: Wat is de juridische vraag?
 2. Rule: Welke wettelijke regels zijn van toepassing?
 3. Application: Hoe passen deze regels op deze specifieke feiten?
-4. Conclusion: Wat is de juridische conclusie?`}</pre>
-                                </div>
-                            </CardContent>
-                        </Card>
+4. Conclusion: Wat is de juridische conclusie?`
+        },
+        {
+            id: 29,
+            title: 'DGR – Juridisch advies',
+            subtitle: 'Deugdelijk, Gemotiveerd, Rechtskundig advies',
+            description: 'Framework voor het geven van kwalitatief juridisch advies met goede onderbouwing.',
+            example: `Geef advies volgens het DGR-framework over deze kwestie:
 
-                        <Card className="framework-card bg-muted/30 hover:shadow-lg transition-shadow">
-                            <CardHeader>
-                                <CardTitle>DGR – Juridisch advies</CardTitle>
-                                <CardDescription className="italic">
-                                    Deugdelijk, Gemotiveerd, Rechtskundig advies
-                                </CardDescription>
-                            </CardHeader>
-                            <CardContent>
-                                <p>Framework voor het geven van kwalitatief juridisch advies met goede onderbouwing.</p>
-                            </CardContent>
-                        </Card>
+1. Deugdelijk: Wat zijn alle relevante feiten en omstandigheden?
+2. Gemotiveerd: Onderbouw je advies met wetsartikelen en jurisprudentie
+3. Rechtskundig: Wat is de juridisch correcte conclusie en wat raad je aan?`
+        },
+        {
+            id: 30,
+            title: 'SATO – Juridische stellingname',
+            subtitle: 'Standpunt, Argument, Tegenargument, Oordeel',
+            description: 'Voor het opbouwen van juridische argumentatie met aandacht voor tegenargumenten.',
+            example: `Beoordeel deze zaak volgens het SATO-framework:
 
-                        <Card className="framework-card bg-muted/30 hover:shadow-lg transition-shadow">
-                            <CardHeader>
-                                <CardTitle>SATO – Juridische stellingname</CardTitle>
-                                <CardDescription className="italic">
-                                    Standpunt, Argument, Tegenargument, Oordeel
-                                </CardDescription>
-                            </CardHeader>
-                            <CardContent>
-                                <p>Voor het opbouwen van juridische argumentatie met aandacht voor tegenwerpingen.</p>
-                            </CardContent>
-                        </Card>
+1. Standpunt: Wat is ons juridische standpunt?
+2. Argument: Welke argumenten ondersteunen dit standpunt?
+3. Tegenargument: Welke tegenargumenten zijn te verwachten?
+4. Oordeel: Hoe weerleggen we de tegenargumenten en wat is de conclusie?`
+        },
+        {
+            id: 31,
+            title: 'MECE – Juridische structurering',
+            subtitle: 'Mutually Exclusive, Collectively Exhaustive',
+            description: 'Zorg dat je analyse volledig is en geen overlap heeft tussen categorieën.',
+            example: `Analyseer dit contract volgens het MECE-principe:
 
-                        <Card className="framework-card bg-muted/30 hover:shadow-lg transition-shadow">
-                            <CardHeader>
-                                <CardTitle>MECE – Juridische structurering</CardTitle>
-                                <CardDescription className="italic">
-                                    Mutually Exclusive, Collectively Exhaustive
-                                </CardDescription>
-                            </CardHeader>
-                            <CardContent>
-                                <p>Zorg dat je analyse volledig is en geen overlap heeft tussen categorieën.</p>
-                            </CardContent>
-                        </Card>
-                    </div>
+Zorg dat je analyse:
+- Mutually Exclusive: elke clausule valt in één categorie (geen overlap)
+- Collectively Exhaustive: alle clausules zijn gedekt (volledig)
+
+Categoriseer in: verplichtingen partijen, financieel, aansprakelijkheid, beëindiging, overig.`
+        }
+    ]
+
+    const languageFrameworks = [
+        {
+            id: 32,
+            title: 'ELI5 – Toegankelijke uitleg',
+            subtitle: 'Explain Like I\'m 5',
+            description: 'Leg complexe materie uit op begrijpelijke wijze, zonder te simplificeren.',
+            example: 'Leg het concept van aansprakelijkheid bij productdefecten uit alsof je het aan iemand uitlegt zonder juridische achtergrond. Gebruik heldere taal en concrete voorbeelden.'
+        },
+        {
+            id: 33,
+            title: '5W1H – Feitelijke analyse',
+            subtitle: 'Who, What, When, Where, Why, How',
+            description: 'Zorg dat alle relevante vragen beantwoord worden in je analyse.',
+            example: `Analyseer dit incident volgens het 5W1H-framework:
+
+- Who: Wie zijn de betrokken partijen?
+- What: Wat is er precies gebeurd?
+- When: Wanneer vond dit plaats?
+- Where: Waar heeft het plaatsgevonden?
+- Why: Waarom is dit relevant/gebeurd?
+- How: Hoe heeft dit zich afgespeeld?`
+        },
+        {
+            id: 34,
+            title: 'AIDA – Overtuigende communicatie',
+            subtitle: 'Attention, Interest, Desire, Action',
+            description: 'Voor communicatie die de ontvanger aanzet tot actie.',
+            example: `Schrijf een brief aan de wederpartij volgens het AIDA-model:
+
+1. Attention: Trek aandacht met een krachtige opening
+2. Interest: Wek interesse door het probleem helder te schetsen
+3. Desire: Creëer verlangen naar een oplossing
+4. Action: Sluit af met een duidelijke call-to-action`
+        },
+        {
+            id: 35,
+            title: 'Pyramid principle – Rapportage',
+            subtitle: 'Start met conclusie, onderbouw daarna',
+            description: 'Efficiënte structuur voor adviezen: begin met je advies, leg daarna uit waarom.',
+            example: `Schrijf een advies volgens het Pyramid Principle:
+
+1. Begin met de conclusie/advies (wat moet de cliënt doen?)
+2. Geef de belangrijkste argumenten (waarom?)
+3. Werk elk argument uit met onderbouwing
+4. Voeg ondersteunende details toe
+
+Zo krijgt de lezer direct het antwoord en kan zelf bepalen hoe diep in te gaan.`
+        },
+        {
+            id: 36,
+            title: 'SCQA – Verhaal opbouwen',
+            subtitle: 'Situation, Complication, Question, Answer',
+            description: 'Voor heldere storytelling in adviezen en memo\'s.',
+            example: `Structureer je memo volgens het SCQA-framework:
+
+1. Situation: Schets de context en achtergrond
+2. Complication: Wat is het probleem of de uitdaging?
+3. Question: Welke vraag moet beantwoord worden?
+4. Answer: Geef het antwoord met onderbouwing`
+        }
+    ]
+
+    const renderFrameworks = (frameworks: typeof legalFrameworks) => (
+        <div className="space-y-8">
+            {frameworks.map((framework, idx) => (
+                <div key={idx} className="border-b last:border-b-0 pb-8 last:pb-0">
+                    <h4 className="font-medium mb-1">
+                        {framework.id ? `${framework.id}. ` : ''}{framework.title}
+                    </h4>
+                    <p className="text-sm text-muted-foreground italic mb-2">{framework.subtitle}</p>
+                    <p className="text-sm text-muted-foreground mb-3 leading-6">
+                        {framework.description}
+                    </p>
+                    {framework.example && (
+                        <div className="bg-muted/50 rounded-lg p-4">
+                            <pre className="whitespace-pre-wrap font-mono text-xs leading-relaxed">
+                                {framework.example}
+                            </pre>
+                        </div>
+                    )}
+                </div>
+            ))}
+        </div>
+    )
+
+    return (
+        <section id="frameworks" className="mb-16">
+            <h2 className="text-2xl font-semibold tracking-tight mb-3">
+                Juridische & taalframeworks
+            </h2>
+            <p className="mb-10 text-sm text-muted-foreground leading-6">
+                Gevestigde frameworks uit de juridische en communicatieve wereld die je kunt gebruiken om structuur aan te brengen in je prompts.
+            </p>
+
+            <div className="space-y-12">
+                <div>
+                    <h3 className="text-lg font-medium mb-6">Juridische frameworks</h3>
+                    {renderFrameworks(legalFrameworks)}
                 </div>
 
                 <div>
-                    <h3 className="text-2xl font-semibold mb-4">Algemene taalframeworks</h3>
-                    <div className="space-y-4">
-                        <Card className="framework-card bg-muted/30 hover:shadow-lg transition-shadow">
-                            <CardHeader>
-                                <CardTitle>20. ELI5 – Toegankelijke uitleg</CardTitle>
-                                <CardDescription className="italic">
-                                    Explain Like I'm 5
-                                </CardDescription>
-                            </CardHeader>
-                            <CardContent className="space-y-4">
-                                <p>Leg complexe materie uit op begrijpelijke wijze, zonder te simplificeren.</p>
-                                <div className="bg-muted rounded-lg p-4 border-l-4 border-primary">
-                                    <pre className="whitespace-pre-wrap font-mono text-sm">Leg het concept van aansprakelijkheid bij productdefecten uit alsof je het aan iemand uitlegt zonder juridische achtergrond. Gebruik heldere taal en concrete voorbeelden.</pre>
-                                </div>
-                            </CardContent>
-                        </Card>
-
-                        <Card className="framework-card bg-muted/30 hover:shadow-lg transition-shadow">
-                            <CardHeader>
-                                <CardTitle>5W1H – Feitelijke analyse</CardTitle>
-                                <CardDescription className="italic">
-                                    Who, What, When, Where, Why, How
-                                </CardDescription>
-                            </CardHeader>
-                            <CardContent>
-                                <p>Zorg dat alle relevante vragen beantwoord worden in je analyse.</p>
-                            </CardContent>
-                        </Card>
-
-                        <Card className="framework-card bg-muted/30 hover:shadow-lg transition-shadow">
-                            <CardHeader>
-                                <CardTitle>WHY, HOW, WHAT – Overtuigende opbouw</CardTitle>
-                                <CardDescription className="italic">
-                                    Bekend van Simon Sinek
-                                </CardDescription>
-                            </CardHeader>
-                            <CardContent>
-                                <p>Begin met het waarom, vervolg met hoe, eindig met wat. Effectief voor strategische communicatie.</p>
-                            </CardContent>
-                        </Card>
-
-                        <Card className="border-teal-200 dark:border-teal-900 bg-teal-50 dark:bg-teal-950/20 hover:shadow-md transition-shadow">
-                            <CardHeader>
-                                <CardTitle>21. SCQA – Probleemanalyse</CardTitle>
-                                <CardDescription className="italic">
-                                    Situation, Complication, Question, Answer
-                                </CardDescription>
-                            </CardHeader>
-                            <CardContent className="space-y-4">
-                                <p>Framework voor het gestructureerd aanpakken van complexe juridische vraagstukken. Helpt om van een brede situatie naar een concrete oplossing te komen.</p>
-
-                                <div className="bg-muted rounded-lg p-4 border-l-4 border-primary">
-                                    <pre className="whitespace-pre-wrap font-mono text-sm">{`Analyseer deze juridische kwestie volgens het SCQA-framework:
-
-Situation: Schets de huidige situatie en context. Wat is de achtergrond?
-
-Complication: Wat is het probleem of de complicatie? Waarom is dit een uitdaging?
-
-Question: Wat is de specifieke vraag die beantwoord moet worden?
-
-Answer: Wat is jouw advies of oplossing, inclusief onderbouwing?`}</pre>
-                                </div>
-
-                                <div className="grid md:grid-cols-2 gap-4">
-                                    <div className="bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-900 rounded-lg p-4">
-                                        <h4 className="font-semibold mb-2">✅ Do's</h4>
-                                        <ul className="space-y-1 text-sm">
-                                            <li>• Begin breed met situatieschets</li>
-                                            <li>• Identificeer het echte probleem</li>
-                                            <li>• Formuleer een scherpe vraag</li>
-                                            <li>• Geef een onderbouwd antwoord</li>
-                                        </ul>
-                                    </div>
-                                    <div className="bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-900 rounded-lg p-4">
-                                        <h4 className="font-semibold mb-2">❌ Don'ts</h4>
-                                        <ul className="space-y-1 text-sm">
-                                            <li>• Niet meteen naar antwoord springen</li>
-                                            <li>• Geen onduidelijke probleemstelling</li>
-                                            <li>• Niet de vraag overslaan</li>
-                                            <li>• Geen antwoord zonder onderbouwing</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </CardContent>
-                        </Card>
-                    </div>
+                    <h3 className="text-lg font-medium mb-6">Algemene taalframeworks</h3>
+                    {renderFrameworks(languageFrameworks)}
                 </div>
             </div>
         </section>
     )
 }
-

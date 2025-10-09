@@ -1,4 +1,4 @@
-import { Home, BookOpen, Lightbulb, Layers, MessageSquare, Brain, Wrench, Printer } from 'lucide-react'
+import { Home, Lightbulb, Layers, MessageSquare, Brain, Wrench, Printer } from 'lucide-react'
 import {
     Sidebar,
     SidebarContent,
@@ -29,7 +29,7 @@ const menuItems = [
 const technieken = [
     {
         title: 'Basistechnieken',
-        icon: BookOpen,
+        icon: Lightbulb,
         href: '#basistechnieken',
     },
     {
@@ -72,10 +72,12 @@ export function AppSidebar() {
     return (
         <Sidebar className="print:hidden">
             <SidebarHeader className="border-b px-6 py-4">
-                <div className="flex items-center gap-2">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-blue-600 to-indigo-600">
-                        <BookOpen className="h-5 w-5 text-white" />
-                    </div>
+                <div className="flex items-center gap-3">
+                    <img
+                        src="/logo.webp"
+                        alt="Logo"
+                        className="h-8 w-8 object-contain"
+                    />
                     <div>
                         <h2 className="text-lg font-semibold">Prompting gids</h2>
                         <p className="text-xs text-muted-foreground">Voor advocaten</p>

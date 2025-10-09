@@ -1,4 +1,5 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Paperclip } from 'lucide-react'
+import { Badge } from '@/components/ui/badge'
 
 export default function BaseTechniques() {
     const techniques = [
@@ -7,6 +8,7 @@ export default function BaseTechniques() {
             title: 'Single shot prompting',
             level: 'Beginner',
             description: 'Wanneer te gebruiken: voor eenvoudige, directe vragen zonder voorbeelden. Effectief voor taken die duidelijk zijn en weinig context vereisen.',
+            requiresAttachment: true,
             example: 'Vat deze huurovereenkomst samen in 3 hoofdpunten.',
             dos: ['Wees specifiek over wat je wilt', 'Geef duidelijke output-verwachtingen', 'Gebruik voor eenvoudige, duidelijke taken'],
             donts: ['Geen vage of brede vragen', 'Niet voor complexe analyses gebruiken', 'Geen inconsistente format verwachten']
@@ -16,6 +18,7 @@ export default function BaseTechniques() {
             title: 'Few shot prompting',
             level: 'Beginner',
             description: 'Wanneer te gebruiken: als je specifieke voorbeelden wilt geven van hoe de output eruit moet zien. Verhoogt de consistentie en kwaliteit aanzienlijk.',
+            requiresAttachment: true,
             example: `Hier zie je hoe ik bepalingen uit een arbeidsovereenkomst samenvat:
 
 1. Proeftijd: maximaal 1 maand, conform art. 7:652 lid 4 BW
@@ -30,6 +33,7 @@ Vat nu de volgende bepaling op dezelfde manier samen: ....`,
             title: 'Chained prompts / Multi-step',
             level: 'Gemiddeld',
             description: 'Wanneer te gebruiken: voor complexe taken die meerdere stappen vereisen. Deel het probleem op in beheersbare delen.',
+            requiresAttachment: true,
             example: `Analyseer deze huurovereenkomst.
 Identificeer risico's voor verhuurder.
 Controleer op ongebruikelijke clausules.
@@ -42,6 +46,7 @@ Geef concrete implementatie-aanbevelingen.`,
             title: 'Chain of thought prompting',
             level: 'Gemiddeld',
             description: 'Wanneer te gebruiken: voor complexe juridische analyses waarbij stapsgewijze redenering vereist is. Verbetert de kwaliteit van juridische conclusies.',
+            requiresAttachment: true,
             example: `Analyseer dit ontslagdossier stap voor stap:
 
 1. Identificeer eerst de juridische vraag.
@@ -115,58 +120,84 @@ Ik vind empatisch leiderschap en actiegerichtheid belangrijk, keuzes maken we la
             level: 'Beginner',
             description: 'Wanneer te gebruiken: voor het verkennen van juridische opties voordat je een strategie bepaalt.',
             example: 'Brainstorm juridische mogelijkheden voor dit geschil. Denk breed en creatief, haalbaarheid komt later.'
+        },
+        {
+            id: 12,
+            title: 'Meta-prompting',
+            level: 'Gemiddeld',
+            description: 'Wanneer te gebruiken: als je niet zeker weet hoe je je vraag het beste kunt formuleren. Laat de AI een betere prompt schrijven.',
+            requiresAttachment: false,
+            example: `Ik wil een grondige analyse van dit arbeidsconflict.
+
+Voordat je de analyse maakt: schrijf eerst een gedetailleerde, gestructureerde prompt die ik zou moeten gebruiken om de beste mogelijk analyse te krijgen. Leg uit waarom deze prompt effectiever is.`,
+            dos: ['Vraag om betere promptformulering', 'Laat de AI uitleggen waarom', 'Gebruik de verbeterde prompt'],
+            donts: ['Niet bij simpele vragen', 'Geen oneindige loop van meta-prompts', 'Niet zonder de suggestie te beoordelen']
         }
     ]
 
     return (
-        <section id="basistechnieken" className="mb-12">
-            <h2 className="text-3xl font-bold mb-6 pb-3 border-b">
+        <section id="basistechnieken" className="mb-16">
+            <h2 className="text-2xl font-semibold tracking-tight mb-3">
                 Basistechnieken
             </h2>
-            <p className="mb-6 text-muted-foreground">
+            <p className="mb-10 text-sm text-muted-foreground leading-6">
                 Deze fundamentele technieken vormen de basis van effectief prompting. Ze zijn eenvoudig toe te passen en direct bruikbaar in de dagelijkse praktijk.
             </p>
 
-            <div className="space-y-6">
+            <div className="space-y-10">
                 {techniques.map((technique) => (
-                    <Card key={technique.id} className="technique-card hover:shadow-lg transition-shadow">
-                        <CardHeader>
-                            <CardTitle className="text-xl">
+                    <div key={technique.id} className="border-b last:border-b-0 pb-10 last:pb-0">
+                        <div className="flex items-start justify-between gap-4 mb-2">
+                            <h3 className="text-lg font-medium">
                                 {technique.id}. {technique.title}
-                            </CardTitle>
-                            <CardDescription className="italic">
-                                {technique.description}
-                            </CardDescription>
-                        </CardHeader>
-                        <CardContent className="space-y-4">
-                            <div className="bg-muted rounded-lg p-4 border-l-4 border-primary">
-                                <pre className="whitespace-pre-wrap font-mono text-sm">
-                                    {technique.example}
-                                </pre>
-                            </div>
-
-                            {technique.dos && technique.donts && (
-                                <div className="grid md:grid-cols-2 gap-4">
-                                    <div className="bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-900 rounded-lg p-4">
-                                        <h4 className="font-semibold mb-2">✅ Do's</h4>
-                                        <ul className="space-y-1 text-sm">
-                                            {technique.dos.map((item, idx) => (
-                                                <li key={idx}>• {item}</li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                    <div className="bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-900 rounded-lg p-4">
-                                        <h4 className="font-semibold mb-2">❌ Don'ts</h4>
-                                        <ul className="space-y-1 text-sm">
-                                            {technique.donts.map((item, idx) => (
-                                                <li key={idx}>• {item}</li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                </div>
+                            </h3>
+                            {technique.requiresAttachment && (
+                                <Badge variant="secondary" className="gap-1.5 whitespace-nowrap">
+                                    <Paperclip className="h-3 w-3" />
+                                    Bijlage vereist
+                                </Badge>
                             )}
-                        </CardContent>
-                    </Card>
+                        </div>
+                        <p className="text-sm text-muted-foreground mb-4 leading-6">
+                            {technique.description}
+                        </p>
+
+                        {technique.requiresAttachment && (
+                            <div className="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900 rounded-lg p-3 flex gap-2 mb-4">
+                                <Paperclip className="h-4 w-4 text-amber-600 dark:text-amber-500 flex-shrink-0 mt-0.5" />
+                                <p className="text-sm text-amber-900 dark:text-amber-100">
+                                    <strong>Bijlage:</strong> Voeg het document toe aan je prompt.
+                                </p>
+                            </div>
+                        )}
+
+                        <div className="bg-muted/50 rounded-lg p-4 mb-4">
+                            <pre className="whitespace-pre-wrap font-mono text-xs leading-relaxed">
+                                {technique.example}
+                            </pre>
+                        </div>
+
+                        {technique.dos && technique.donts && (
+                            <div className="grid md:grid-cols-2 gap-4 text-sm">
+                                <div className="rounded-lg border bg-card p-4">
+                                    <h4 className="font-medium mb-3">✓ Do's</h4>
+                                    <ul className="space-y-2 text-muted-foreground">
+                                        {technique.dos.map((item, idx) => (
+                                            <li key={idx} className="leading-relaxed">• {item}</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                                <div className="rounded-lg border bg-card p-4">
+                                    <h4 className="font-medium mb-3">✗ Don'ts</h4>
+                                    <ul className="space-y-2 text-muted-foreground">
+                                        {technique.donts.map((item, idx) => (
+                                            <li key={idx} className="leading-relaxed">• {item}</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </div>
+                        )}
+                    </div>
                 ))}
             </div>
         </section>

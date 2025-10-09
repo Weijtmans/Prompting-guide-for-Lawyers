@@ -1,11 +1,8 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-
 export default function ReflectivePrompting() {
     const techniques = [
         {
-            id: 30,
+            id: 51,
             title: 'Rationale prompting',
-            level: 'Gemiddeld',
             description: 'Wanneer te gebruiken: als je wilt dat de AI zijn redenering transparant maakt.',
             example: `Leg per stap uit, vraag bijv:
 - Waar baseer je dit op?
@@ -13,43 +10,38 @@ export default function ReflectivePrompting() {
 - Wat zou een ander zeggen?`
         },
         {
-            id: 31,
+            id: 52,
             title: 'Explain reasoning – professionele context',
-            level: 'Gemiddeld',
             description: 'Wanneer te gebruiken: voor diepere analyse van de onderbouwing.',
             example: `- Waar baseer je dit advies precies op?
 - Wat zijn mogelijke alternatieven die je hebt overwogen?
 - Welke aannames liggen onder je conclusie?`
         },
         {
-            id: 32,
+            id: 53,
             title: 'Explain reasoning – juridische voorbeelden',
-            level: 'Beginner',
             description: 'Wanneer te gebruiken: om juridische termen en concepten te verduidelijken.',
             example: `- Wat bedoel je precies met verhaalsmogelijkheden?
 - Welke wetsartikelen vallen onder deze relevante wetgeving?
 - Wat wordt hier verstaan onder een redelijke termijn?`
         },
         {
-            id: 33,
+            id: 54,
             title: 'Perspectiefwisseling',
-            level: 'Gemiddeld',
             description: 'Wanneer te gebruiken: om alle betrokken partijen te begrijpen in een conflict of onderhandeling.',
             example: 'Analyseer dit conflict afzonderlijk vanuit de grootaandeelhouders, de kleinere aandeelhouders en het bestuur.',
             dos: ['Vraag om elk perspectief apart', 'Laat belangen identificeren', 'Vergelijk perspectieven aan het eind'],
             donts: ['Niet alle perspectieven door elkaar', 'Geen bias naar één perspectief', 'Niet alleen oppervlakkig bekijken']
         },
         {
-            id: 34,
+            id: 55,
             title: 'Alternatieve interpretatie',
-            level: 'Gemiddeld',
             description: 'Wanneer te gebruiken: om onderliggende motivaties en werkelijke belangen te onderzoeken.',
             example: 'Gaat het vooral om macht en invloed, of verschillen ze echt van mening over waar het bedrijf naartoe moet?'
         },
         {
-            id: 35,
+            id: 56,
             title: 'Compare answers',
-            level: 'Gemiddeld',
             description: 'Wanneer te gebruiken: om verschillende juridische strategieën systematisch te vergelijken.',
             example: `Geef twee manieren om dit geschil over bouwvertraging aan te pakken:
 
@@ -61,18 +53,16 @@ Vergelijk beide op juridische haalbaarheid, financiële gevolgen, risico's en su
             donts: ['Niet te veel opties (max 3-4)', 'Geen onduidelijke criteria', 'Niet zonder conclusie/advies']
         },
         {
-            id: 36,
+            id: 57,
             title: 'Bias-awareness & critical reflection',
-            level: 'Gevorderd',
             description: 'Wanneer te gebruiken: om aannames en mogelijke vooroordelen in analyses te identificeren.',
             example: `- Welke aannames maak je over het gedrag van de ondernemer?
 - Zijn die aannames eerlijk en juridisch goed onderbouwd?
 - Is er ruimte voor een andere lezing?`
         },
         {
-            id: 37,
+            id: 58,
             title: 'Devil\'s advocate prompting',
-            level: 'Gevorderd',
             description: 'Wanneer te gebruiken: om zwakke plekken in je strategie of advies te identificeren.',
             example: `Bekijk dit advies voor herstructurering:
 
@@ -85,57 +75,53 @@ Vergelijk beide op juridische haalbaarheid, financiële gevolgen, risico's en su
     ]
 
     return (
-        <section id="reflective" className="mb-12">
-            <h2 className="text-3xl font-bold mb-6 pb-3 border-b">
+        <section id="reflective" className="mb-16">
+            <h2 className="text-2xl font-semibold tracking-tight mb-3">
                 Reflective prompting
             </h2>
-            <p className="mb-6 text-muted-foreground">
+            <p className="mb-10 text-sm text-muted-foreground leading-6">
                 Technieken om de AI kritisch te laten nadenken over zijn eigen output en verschillende perspectieven te verkennen.
             </p>
 
-            <div className="space-y-6">
+            <div className="space-y-10">
                 {techniques.map((technique) => (
-                    <Card key={technique.id} className="technique-card hover:shadow-lg transition-shadow">
-                        <CardHeader>
-                            <CardTitle className="text-xl">
-                                {technique.id}. {technique.title}
-                            </CardTitle>
-                            <CardDescription className="italic">
-                                {technique.description}
-                            </CardDescription>
-                        </CardHeader>
-                        <CardContent className="space-y-4">
-                            <div className="bg-muted rounded-lg p-4 border-l-4 border-primary">
-                                <pre className="whitespace-pre-wrap font-mono text-sm">
-                                    {technique.example}
-                                </pre>
-                            </div>
+                    <div key={technique.id} className="border-b last:border-b-0 pb-10 last:pb-0">
+                        <h3 className="text-lg font-medium mb-2">
+                            {technique.id}. {technique.title}
+                        </h3>
+                        <p className="text-sm text-muted-foreground mb-4 leading-6">
+                            {technique.description}
+                        </p>
 
-                            {technique.dos && technique.donts && (
-                                <div className="grid md:grid-cols-2 gap-4">
-                                    <div className="bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-900 rounded-lg p-4">
-                                        <h4 className="font-semibold mb-2">✅ Do's</h4>
-                                        <ul className="space-y-1 text-sm">
-                                            {technique.dos.map((item, idx) => (
-                                                <li key={idx}>• {item}</li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                    <div className="bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-900 rounded-lg p-4">
-                                        <h4 className="font-semibold mb-2">❌ Don'ts</h4>
-                                        <ul className="space-y-1 text-sm">
-                                            {technique.donts.map((item, idx) => (
-                                                <li key={idx}>• {item}</li>
-                                            ))}
-                                        </ul>
-                                    </div>
+                        <div className="bg-muted/50 rounded-lg p-4 mb-4">
+                            <pre className="whitespace-pre-wrap font-mono text-xs leading-relaxed">
+                                {technique.example}
+                            </pre>
+                        </div>
+
+                        {technique.dos && technique.donts && (
+                            <div className="grid md:grid-cols-2 gap-4 text-sm">
+                                <div className="rounded-lg border bg-card p-4">
+                                    <h4 className="font-medium mb-3">✓ Do's</h4>
+                                    <ul className="space-y-2 text-muted-foreground">
+                                        {technique.dos.map((item, idx) => (
+                                            <li key={idx} className="leading-relaxed">• {item}</li>
+                                        ))}
+                                    </ul>
                                 </div>
-                            )}
-                        </CardContent>
-                    </Card>
+                                <div className="rounded-lg border bg-card p-4">
+                                    <h4 className="font-medium mb-3">✗ Don'ts</h4>
+                                    <ul className="space-y-2 text-muted-foreground">
+                                        {technique.donts.map((item, idx) => (
+                                            <li key={idx} className="leading-relaxed">• {item}</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </div>
+                        )}
+                    </div>
                 ))}
             </div>
         </section>
     )
 }
-

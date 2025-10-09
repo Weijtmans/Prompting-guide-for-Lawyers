@@ -17,7 +17,7 @@ export default function QuickReference() {
         { name: 'SCQA', description: 'Situation, Complication, Question, Answer', level: 'Gemiddeld' },
         { name: 'DGR, SATO, MECE', description: 'Juridische structuur frameworks', level: 'Gemiddeld' },
         { name: 'ELI5, 5W1H', description: 'Toegankelijke communicatie frameworks', level: 'Beginner' },
-        { name: 'Combinatietechnieken', description: 'Meerdere technieken slim samenvoegen', level: 'Gevorderd' },
+        { name: 'Combinatietechnieken', description: 'Meerdere technieken effectief combineren', level: 'Gevorderd' },
         { name: 'Task validation', description: 'Laat AI opdracht herhalen', level: 'Beginner' },
         { name: 'Questions up front', description: 'Laat AI relevante vragen stellen', level: 'Gemiddeld' },
         { name: 'Confirm-and-continue', description: 'Goedkeuring per stap', level: 'Gemiddeld' },
