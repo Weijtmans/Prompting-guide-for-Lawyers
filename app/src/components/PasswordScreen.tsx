@@ -54,7 +54,7 @@ export default function PasswordScreen({ onAuthenticated }: PasswordScreenProps)
                     <img
                         src="/logo.webp"
                         alt="Logo"
-                        className="h-20 w-20 rounded-lg"
+                        className="h-20 w-20"
                     />
                     <div className="text-center space-y-1">
                         <h1 className="text-3xl font-bold tracking-tight">
