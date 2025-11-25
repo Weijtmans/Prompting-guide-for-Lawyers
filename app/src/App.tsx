@@ -1,52 +1,45 @@
 import './App.css'
-import { useState, useEffect } from 'react'
 import { SidebarProvider, SidebarInset } from '@/components/ui/sidebar'
 import { AppSidebar } from './components/AppSidebar'
 import Introduction from './components/Introduction'
 import WarningBox from './components/WarningBox'
 import BestPractices from './components/BestPractices'
-import BaseTechniques from './components/BaseTechniques'
-import PromptTactics from './components/PromptTactics'
-import Frameworks from './components/Frameworks'
-import CombinationTechniques from './components/CombinationTechniques'
-import ConversationalPrompting from './components/ConversationalPrompting'
-import ReflectivePrompting from './components/ReflectivePrompting'
-import PracticalTools from './components/PracticalTools'
-import PasswordScreen from './components/PasswordScreen'
+import Fundamentals from './components/Fundamentals'
+import LegalResearch from './components/use-cases/LegalResearch'
+import ContractDrafting from './components/use-cases/ContractDrafting'
+import Litigation from './components/use-cases/Litigation'
+import ClientCommunication from './components/use-cases/ClientCommunication'
+import Strategy from './components/use-cases/Strategy'
+import { LanguageProvider } from './context/LanguageContext'
 
-function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
-
-  useEffect(() => {
-    // Check if user is already authenticated in this session
-    const authenticated = sessionStorage.getItem('authenticated') === 'true'
-    setIsAuthenticated(authenticated)
-  }, [])
-
-  if (!isAuthenticated) {
-    return <PasswordScreen onAuthenticated={() => setIsAuthenticated(true)} />
-  }
-
+function AppContent() {
   return (
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
         <div className="flex flex-1 flex-col">
+
           <div className="flex flex-1 flex-col">
             <main className="flex-1">
               <div className="container max-w-4xl mx-auto py-8 px-6">
+                <div className="hidden print:block mb-8">
+                  <img src="/logo.webp" alt="HVG Law" className="h-12" />
+                </div>
                 <div id="intro">
                   <Introduction />
                 </div>
                 <WarningBox />
                 <BestPractices />
-                <BaseTechniques />
-                <PromptTactics />
-                <Frameworks />
-                <CombinationTechniques />
-                <ConversationalPrompting />
-                <ReflectivePrompting />
-                <PracticalTools />
+                <Fundamentals />
+
+                <div className="my-12 border-t pt-12">
+                  <h2 className="text-3xl font-bold mb-8 print:hidden">Juridische Use Cases</h2>
+                  <ContractDrafting />
+                  <LegalResearch />
+                  <Litigation />
+                  <ClientCommunication />
+                  <Strategy />
+                </div>
               </div>
             </main>
           </div>
@@ -55,5 +48,14 @@ function App() {
     </SidebarProvider>
   )
 }
+
+function App() {
+  return (
+    <LanguageProvider>
+      <AppContent />
+    </LanguageProvider>
+  )
+}
+
 
 export default App
