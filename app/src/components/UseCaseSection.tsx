@@ -31,7 +31,7 @@ export default function UseCaseSection({
     const { t } = useLanguage()
 
     return (
-        <section id={id} className="mb-16 scroll-mt-20">
+        <section id={id} className="mb-16 scroll-mt-20 animate-fade-in opacity-0" style={{ animationFillMode: 'forwards' }}>
             <div className="flex items-center gap-3 mb-6">
                 <div className={cn("p-2 rounded-lg", iconBgClass)}>
                     <Icon className={cn("h-6 w-6", iconColorClass)} />
@@ -49,7 +49,6 @@ export default function UseCaseSection({
                 {items.map((item) => (
                     <UseCaseCard
                         key={item.key}
-                        item={item}
                         baseTranslationKey={`useCases.${id.replace(/-([a-z])/g, (g) => g[1].toUpperCase())}.${item.translationKey}`}
                     />
                 ))}
@@ -58,7 +57,7 @@ export default function UseCaseSection({
     )
 }
 
-function UseCaseCard({ item, baseTranslationKey }: { item: UseCaseItemConfig, baseTranslationKey: string }) {
+function UseCaseCard({ baseTranslationKey }: { baseTranslationKey: string }) {
     const { t } = useLanguage()
     const [copied, setCopied] = useState(false)
 

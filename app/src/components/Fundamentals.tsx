@@ -7,7 +7,7 @@ export default function Fundamentals() {
     const techniques = t('fundamentals.techniques')
 
     return (
-        <section id="fundamentals" className="mb-16">
+        <section id="fundamentals" className="mb-16 animate-fade-in opacity-0" style={{ animationDelay: '100ms', animationFillMode: 'forwards' }}>
             <h2 className="text-2xl font-semibold tracking-tight mb-3">
                 {t('fundamentals.title')}
             </h2>

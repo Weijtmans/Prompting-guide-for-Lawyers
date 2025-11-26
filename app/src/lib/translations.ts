@@ -558,8 +558,10 @@ When a user asks you to create a footnote, first ask which source the user wants
                 persona: {
                     title: 'Persona Prompting',
                     subtitle: 'Simulate the opposing party or judge',
-                    judge: { title: 'The Judge', example: 'Read this draft petition as a critical subdistrict court judge. Which parts are not convincing or lack substantiation?' },
-                    opponent: { title: 'The Opposing Party', example: 'React as an angry and nervous client who realized the litigation risks too late.' }
+                    example: {
+                        judge: { title: 'The Judge', example: 'Read this draft petition as a critical subdistrict court judge. Which parts are not convincing or lack substantiation?' },
+                        opponent: { title: 'The Opposing Party', example: 'React as an angry and nervous client who realized the litigation risks too late.' }
+                    }
                 },
                 stepByStep: {
                     title: 'Step-by-Step Analysis',

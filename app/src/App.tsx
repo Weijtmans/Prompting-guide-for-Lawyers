@@ -31,7 +31,7 @@ function AppContent() {
                 <Fundamentals />
 
                 <div className="my-12 border-t pt-12">
-                  <h2 className="text-3xl font-bold mb-8 print:hidden">Juridische Use Cases</h2>
+                  <h2 className="text-3xl font-bold mb-8 print:hidden">{t('common.useCases')}</h2>
                   {useCasesConfig.map((config) => (
                     <UseCaseSection
                       key={config.id}
