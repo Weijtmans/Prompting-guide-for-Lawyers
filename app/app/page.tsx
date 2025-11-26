@@ -1,14 +1,9 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import dynamic from "next/dynamic"
 import { GuideContent } from "@/components/guide/guide-content"
 import { GuideHero } from "@/components/guide/guide-hero"
 import Script from "next/script"
-
-const Leva = dynamic(() => import("leva").then((mod) => mod.Leva), {
-  ssr: false,
-})
 
 export default function Home() {
   const [language, setLanguage] = useState<"en" | "nl">("nl")
@@ -110,7 +105,6 @@ export default function Home() {
       />
       <GuideHero language={language} onLanguageChange={setLanguage} />
       <GuideContent language={language} />
-      {process.env.NODE_ENV === "development" && <Leva hidden />}
     </>
   )
 }
