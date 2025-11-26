@@ -12,11 +12,11 @@ export function UseCases({ language }: UseCasesProps) {
   const t = translations[language].useCases
 
   const categories = [
-    { id: "contracts", number: "2", data: t.contracts },
-    { id: "research", number: "3", data: t.research },
-    { id: "litigation", number: "4", data: t.litigation },
-    { id: "communication", number: "5", data: t.communication },
-    { id: "strategy", number: "6", data: t.strategy },
+    { id: "contracts", number: "1", data: t.contracts },
+    { id: "research", number: "2", data: t.research },
+    { id: "litigation", number: "3", data: t.litigation },
+    { id: "communication", number: "4", data: t.communication },
+    { id: "strategy", number: "5", data: t.strategy },
   ]
 
   return (
