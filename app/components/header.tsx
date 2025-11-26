@@ -19,7 +19,7 @@ export const Header = ({ language, onLanguageChange, showPrint = false }: Header
   useEffect(() => {
     const handleScroll = () => {
       // Show full header when scrolled past the hero section (increased threshold to prevent overlap)
-      setScrolled(window.scrollY > window.innerHeight * 0.8)
+      setScrolled(window.scrollY > window.innerHeight * 0.95)
     }
 
     window.addEventListener("scroll", handleScroll)
@@ -40,14 +40,11 @@ export const Header = ({ language, onLanguageChange, showPrint = false }: Header
       {/* Full header - with logo and controls (appears on scroll) */}
       <div className={`fixed z-50 top-0 left-0 w-full print:hidden transition-all duration-300 ${!scrolled ? '-translate-y-full opacity-0' : 'translate-y-0 opacity-100'}`}>
         <header className="flex items-center justify-between container py-4 px-6 gap-6 bg-background/60 backdrop-blur-md border-b border-white/5">
-          {/* Left: Logo */}
-          <Link href="/" className="pointer-events-auto flex-shrink-0">
-            <Logo className="w-20 h-auto" />
-          </Link>
-
-          {/* Right: Language switcher and Print button */}
+          {/* Left: Logo and Print button */}
           <div className="flex items-center gap-3 md:gap-4 pointer-events-auto flex-shrink-0">
-            <LanguageSwitcher language={language} onLanguageChange={onLanguageChange} />
+            <Link href="/" className="pointer-events-auto flex-shrink-0">
+              <Logo className="w-14 h-auto" />
+            </Link>
             {showPrint && (
               <Button
                 size="sm"
@@ -58,6 +55,11 @@ export const Header = ({ language, onLanguageChange, showPrint = false }: Header
                 <span className="hidden md:inline">{language === "en" ? "Print" : "Afdrukken"}</span>
               </Button>
             )}
+          </div>
+
+          {/* Right: Language switcher */}
+          <div className="pointer-events-auto flex-shrink-0">
+            <LanguageSwitcher language={language} onLanguageChange={onLanguageChange} />
           </div>
         </header>
       </div>

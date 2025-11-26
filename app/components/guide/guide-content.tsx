@@ -9,14 +9,19 @@ import { BestPractices } from "./sections/best-practices"
 import { Fundamentals } from "./sections/fundamentals"
 import { UseCases } from "./sections/use-cases"
 import { translations } from "./translations"
+import { Button } from "@/components/ui/button"
+import { Printer } from "lucide-react"
 
 interface GuideContentProps {
   language: "en" | "nl"
-  onLanguageChange: (lang: "en" | "nl") => void
 }
 
-export function GuideContent({ language, onLanguageChange }: GuideContentProps) {
+export function GuideContent({ language }: GuideContentProps) {
   const t = translations[language]
+
+  const handlePrint = () => {
+    window.print()
+  }
 
   return (
     <div id="guide-content" className="min-h-screen bg-background text-foreground relative z-10">
@@ -37,6 +42,16 @@ export function GuideContent({ language, onLanguageChange }: GuideContentProps) 
               {t.mainTitle}
             </h2>
             <p className="text-lg text-foreground/70 print:text-neutral-600">{t.tagline}</p>
+            
+            {/* Print button */}
+            <Button
+              onClick={handlePrint}
+              className="mt-8 mx-auto flex items-center gap-2 print:hidden"
+              variant="outline"
+            >
+              <Printer className="h-4 w-4" />
+              {language === "en" ? "Print Guide" : "Promptgids Afdrukken"}
+            </Button>
           </AnimatedSection>
 
           {/* Table of Contents */}
@@ -97,7 +112,7 @@ function AnimatedSection({
   return (
     <div
       ref={ref}
-      className={`${className} print:opacity-100 print:translate-y-0`}
+      className={`${className} print:!opacity-100 print:!translate-y-0`}
       style={{
         opacity: isVisible ? 1 : 0,
         transform: isVisible ? "translateY(0)" : "translateY(20px)",

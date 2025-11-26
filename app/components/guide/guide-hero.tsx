@@ -1,17 +1,30 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { GL } from "@/components/gl"
 import { Button } from "@/components/ui/button"
 import { ChevronDown } from "lucide-react"
 import { Logo } from "@/components/logo"
+import { LanguageSwitcher } from "./language-switcher"
 
 interface GuideHeroProps {
   language: "en" | "nl"
+  onLanguageChange: (lang: "en" | "nl") => void
 }
 
-export function GuideHero({ language }: GuideHeroProps) {
+export function GuideHero({ language, onLanguageChange }: GuideHeroProps) {
   const [hovering, setHovering] = useState(false)
+  const [showSwitcher, setShowSwitcher] = useState(true)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Hide language switcher when scrolled past 30% of viewport height
+      setShowSwitcher(window.scrollY < window.innerHeight * 0.3)
+    }
+
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   const scrollToContent = () => {
     const content = document.getElementById("guide-content")
@@ -24,6 +37,11 @@ export function GuideHero({ language }: GuideHeroProps) {
   return (
     <div className="relative flex flex-col h-svh overflow-hidden print:hidden">
       <GL hovering={hovering} />
+      
+      {/* Language switcher in top-right - only visible on hero */}
+      <div className={`fixed z-50 top-6 right-6 transition-opacity duration-300 ${showSwitcher ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+        <LanguageSwitcher language={language} onLanguageChange={onLanguageChange} />
+      </div>
 
       <div className="relative z-10 flex flex-1 flex-col items-center justify-center text-center px-4">
         {/* Logo above title */}

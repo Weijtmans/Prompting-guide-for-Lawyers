@@ -1,6 +1,8 @@
 "use client"
 
-import { Paperclip } from "lucide-react"
+import { useState } from "react"
+import { Paperclip, Copy, Check } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 interface TechniqueCardProps {
   title: string
@@ -23,6 +25,8 @@ export function TechniqueCard({
   attachmentRequired,
   language,
 }: TechniqueCardProps) {
+  const [copied, setCopied] = useState(false)
+
   const labels = {
     en: {
       whenToUse: "When to use",
@@ -31,6 +35,8 @@ export function TechniqueCard({
       donts: "Don't",
       why: "Why this works",
       attachment: "Attachment Required",
+      copy: "Copy",
+      copied: "Copied!",
     },
     nl: {
       whenToUse: "Wanneer te gebruiken",
@@ -38,11 +44,23 @@ export function TechniqueCard({
       dos: "Wel",
       donts: "Niet",
       why: "Waarom dit werkt",
-      attachment: "Bijlage Vereist",
+      attachment: "Bijlage vereist",
+      copy: "Kopieer",
+      copied: "Gekopieerd!",
     },
   }
 
   const t = labels[language]
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(examplePrompt)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch (err) {
+      console.error("Failed to copy:", err)
+    }
+  }
 
   return (
     <article className="mb-10 rounded-lg border border-border bg-foreground/[0.02] p-6 transition-colors print:mb-6 print:break-inside-avoid print:border-neutral-200 print:bg-white">
@@ -67,9 +85,29 @@ export function TechniqueCard({
 
       {/* Example Prompt */}
       <div className="mb-4">
-        <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-foreground/50 print:text-neutral-500">
-          {t.examplePrompt}
-        </p>
+        <div className="mb-2 flex items-center justify-between">
+          <p className="text-xs font-semibold uppercase tracking-wider text-foreground/50 print:text-neutral-500">
+            {t.examplePrompt}
+          </p>
+          <Button
+            onClick={handleCopy}
+            variant="ghost"
+            size="sm"
+            className="h-7 gap-1.5 print:hidden"
+          >
+            {copied ? (
+              <>
+                <Check className="h-3.5 w-3.5" />
+                {t.copied}
+              </>
+            ) : (
+              <>
+                <Copy className="h-3.5 w-3.5" />
+                {t.copy}
+              </>
+            )}
+          </Button>
+        </div>
         <pre className="rounded-md border border-border bg-background p-4 font-mono text-sm leading-relaxed text-foreground/90 whitespace-pre-wrap break-words print:border-neutral-200 print:bg-neutral-50 print:text-neutral-800">
           {examplePrompt}
         </pre>

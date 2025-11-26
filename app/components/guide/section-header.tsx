@@ -18,7 +18,7 @@ export function SectionHeader({ id, number, title, subtitle }: SectionHeaderProp
         )}
         <h2 className="font-sentient text-3xl font-extralight tracking-tight print:text-neutral-900">{title}</h2>
       </div>
-      {subtitle && <p className="ml-11 text-foreground/60 print:text-neutral-500">{subtitle}</p>}
+      {subtitle && <p className="text-foreground/60 print:text-neutral-500">{subtitle}</p>}
       <div className="mt-4 h-px bg-gradient-to-r from-primary/50 to-transparent print:from-amber-300" />
     </header>
   )
