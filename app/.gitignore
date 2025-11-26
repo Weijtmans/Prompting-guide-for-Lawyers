@@ -11,10 +11,6 @@ dist/
 .vercel/
 .cache/
 
-# Cloudflare
-.wrangler/
-.dev.vars
-
 # Environment files
 .env
 .env.*
