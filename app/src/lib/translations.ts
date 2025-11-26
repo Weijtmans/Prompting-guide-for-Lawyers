@@ -123,10 +123,10 @@ Geef concrete implementatie-aanbevelingen.`,
         },
         useCases: {
             legalResearch: {
-                title: 'Juridisch Onderzoek & Analyse',
+                title: 'Juridisch onderzoek & analyse',
                 desc: 'Technieken voor het vinden, analyseren en structureren van juridische informatie. Focus op diepgang, volledigheid en het vermijden van hallucinaties.',
                 irac: {
-                    title: 'IRAC Framework',
+                    title: 'IRAC framework',
                     subtitle: 'De standaard voor juridische analyse',
                     example: `Analyseer deze zaak volgens het IRAC-framework:
 
@@ -137,7 +137,7 @@ Geef concrete implementatie-aanbevelingen.`,
                     why: 'Dwingt de AI om structuur aan te brengen en niet direct naar een conclusie te springen.'
                 },
                 stepBack: {
-                    title: 'Step Back Prompting',
+                    title: 'Step back prompting',
                     subtitle: 'Voor betere contextualisering',
                     example: `Voordat je deze juridische vraag beantwoordt, neem eerst een stap terug.
 
@@ -148,7 +148,7 @@ Welke bredere (juridische) principes zijn hier relevant?
 Nu pas: geef je specifieke juridische analyse.`
                 },
                 fiveW: {
-                    title: '5W1H - Feitelijke analyse',
+                    title: '5W1H - feitelijke analyse',
                     subtitle: 'Zorg dat geen enkel feit over het hoofd wordt gezien',
                     example: `Analyseer dit incident volgens het 5W1H-framework:
 
@@ -160,7 +160,7 @@ Nu pas: geef je specifieke juridische analyse.`
 - How: Hoe heeft dit zich afgespeeld?`
                 },
                 bias: {
-                    title: 'Bias Awareness & Reflectie',
+                    title: 'Bias awareness & reflectie',
                     subtitle: 'Voorkom tunnelvisie in je onderzoek',
                     example: `- Welke aannames maak je over het gedrag van de ondernemer?
 - Zijn die aannames eerlijk en juridisch goed onderbouwd?
@@ -169,10 +169,10 @@ Nu pas: geef je specifieke juridische analyse.`
                 }
             },
             contractDrafting: {
-                title: 'Contracten & Documenten',
+                title: 'Contracten & documenten',
                 desc: 'Technieken voor het opstellen, analyseren en samenvatten van contracten en grote documenten. Focus op precisie, consistentie en het verwerken van grote hoeveelheden tekst.',
                 chunking: {
-                    title: 'Document Chunking',
+                    title: 'Document chunking',
                     subtitle: 'Voor het verwerken van grote documenten',
                     example: `Deel dit document op in secties van max 20 pagina's. 
 Analyseer elke sectie apart op [criterium]. 
@@ -180,16 +180,16 @@ Geef daarna een overall conclusie.`,
                     tags: ['Grote bestanden', 'Diepe analyse']
                 },
                 confirm: {
-                    title: 'Confirm-and-Continue',
+                    title: 'Confirm-and-continue',
                     subtitle: 'Houd controle over het proces',
                     example: `- Analyseer <bestemmingsplan.pdf> op afwijkingsmogelijkheden.
 - Stop na elke relevante passage en wacht op akkoord van mij op je analyse.
 - Als alles geanalyseerd is, geef een overzichtelijke samenvatting.`
                 },
                 mece: {
-                    title: 'MECE Structurering',
+                    title: 'MECE structurering',
                     subtitle: 'Mutually Exclusive, Collectively Exhaustive',
-                    example: `Analyseer dit contract volgens het MECE-principe:
+                    example: `Analyseer dit contract volgens het MECE-principle:
 
 Zorg dat je analyse:
 - Mutually Exclusive: elke clausule valt in één categorie (geen overlap)
@@ -198,13 +198,15 @@ Zorg dat je analyse:
 Categoriseer in: verplichtingen partijen, financieel, aansprakelijkheid, beëindiging.`
                 },
                 constraints: {
-                    title: 'Output Constraints',
+                    title: 'Output constraints',
                     subtitle: 'Stuur de vorm van het antwoord',
-                    concise: { title: 'Beknopt', example: "Vat deze analyse samen in maximaal drie alinea's." },
-                    direct: { title: 'Direct', example: 'Lijst de belangrijkste punten op in opsommingstekens, zonder inleiding.' }
+                    example: {
+                        concise: { title: 'Beknopt', example: "Vat deze analyse samen in maximaal drie alinea's." },
+                        direct: { title: 'Direct', example: 'Lijst de belangrijkste punten op in opsommingstekens, zonder inleiding.' }
+                    }
                 },
                 footnotes: {
-                    title: 'Voetnoten Assistent',
+                    title: 'Voetnoten assistent',
                     subtitle: 'Voor correcte bronvermelding',
                     example: `Je bent een juridische assistent voor het maken van voetnoten. Je gebruikt de kennis in de bijgevoegde 'Leidraad voor juridische auteurs' om voetnoten voor mij te maken.
 
@@ -213,10 +215,10 @@ Wanneer een gebruiker aan je vraagt om een voetnoot te maken, vraag je eerste ui
                 }
             },
             litigation: {
-                title: 'Processtukken & Strategie',
+                title: 'Processtukken & strategie',
                 desc: 'Technieken voor het opbouwen van overtuigende argumentatie, het anticiperen op verweren en het bepalen van processtrategie.',
                 sato: {
-                    title: 'SATO Framework',
+                    title: 'SATO framework',
                     subtitle: 'Voor juridische stellingname',
                     example: `Beoordeel deze zaak volgens het SATO-framework:
 
@@ -226,7 +228,7 @@ Wanneer een gebruiker aan je vraagt om een voetnoot te maken, vraag je eerste ui
 4. Oordeel: Hoe weerleggen we de tegenargumenten en wat is de conclusie?`
                 },
                 devil: {
-                    title: "Devil's Advocate",
+                    title: "Devil's advocate",
                     subtitle: 'Identificeer zwakke plekken',
                     example: `Bekijk dit advies voor herstructurering:
 
@@ -235,13 +237,15 @@ Wanneer een gebruiker aan je vraagt om een voetnoot te maken, vraag je eerste ui
 - Welk relevant scenario is nog niet meegenomen?`
                 },
                 persona: {
-                    title: 'Persona Prompting',
+                    title: 'Persona prompting',
                     subtitle: 'Simuleer de tegenpartij of rechter',
-                    judge: { title: 'De Rechter', example: 'Lees dit concept-verzoekschrift als een kritische kantonrechter. Welke onderdelen zijn niet overtuigend of missen onderbouwing?' },
-                    opponent: { title: 'De Tegenpartij', example: "Reageer als een boze en zenuwachtige cliënt die de procesrisico's te laat tot zich heeft door laten dringen." }
+                    example: {
+                        judge: { title: 'De Rechter', example: 'Lees dit concept-verzoekschrift als een kritische kantonrechter. Welke onderdelen zijn niet overtuigend of missen onderbouwing?' },
+                        opponent: { title: 'De Tegenpartij', example: "Reageer als een boze en zenuwachtige cliënt die de procesrisico's te laat tot zich heeft door laten dringen." }
+                    }
                 },
                 stepByStep: {
-                    title: 'Stapsgewijze Analyse',
+                    title: 'Stapsgewijze analyse',
                     subtitle: 'Voor complexe dossiers',
                     example: `Prompt 1: Identificeer de kernvragen in dit huurgeschil.
 
@@ -251,10 +255,10 @@ Prompt 3: Pas deze artikelen toe op de feiten en geef een voorlopige conclusie.`
                 }
             },
             clientCommunication: {
-                title: 'Cliëntcommunicatie & Advies',
+                title: 'Cliëntcommunicatie & advies',
                 desc: 'Technieken voor het vertalen van complexe juridische analyses naar heldere, begrijpelijke adviezen voor cliënten.',
                 audience: {
-                    title: 'Audience & Tone',
+                    title: 'Audience & tone',
                     subtitle: 'Stem je boodschap af op de ontvanger',
                     example: `Publiek: Ondernemer zonder juridische achtergrond, wel commercieel ervaren.
 Toon: Professioneel maar toegankelijk, zonder juridisch jargon.
@@ -262,12 +266,12 @@ Toon: Professioneel maar toegankelijk, zonder juridisch jargon.
 Schrijf een e-mail die de cliënt informeert over de risico's zonder hem onnodig ongerust te maken.`
                 },
                 eli5: {
-                    title: 'ELI5 Framework',
+                    title: 'ELI5 framework',
                     subtitle: "Explain Like I'm 5 (maar dan professioneel)",
                     example: 'Leg het concept van aansprakelijkheid bij productdefecten uit alsof je het aan iemand uitlegt zonder juridische achtergrond. Gebruik heldere taal en concrete voorbeelden.'
                 },
                 pyramid: {
-                    title: 'Pyramid Principle',
+                    title: 'Pyramid principle',
                     subtitle: 'Start met de conclusie',
                     example: `Schrijf een advies volgens het Pyramid Principle:
 
@@ -278,7 +282,7 @@ Schrijf een e-mail die de cliënt informeert over de risico's zonder hem onnodig
                     why: 'Cliënten willen direct het antwoord weten, niet eerst de hele analyse lezen.'
                 },
                 dgr: {
-                    title: 'DGR Framework',
+                    title: 'DGR framework',
                     subtitle: 'Deugdelijk, Gemotiveerd, Rechtskundig',
                     example: `Geef advies volgens het DGR-framework:
 
@@ -288,7 +292,7 @@ Schrijf een e-mail die de cliënt informeert over de risico's zonder hem onnodig
                 }
             },
             strategy: {
-                title: 'Strategie & Brainstorming',
+                title: 'Strategie & brainstorming',
                 desc: 'Technieken voor het verkennen van opties, het genereren van ideeën en het bepalen van de juiste koers.',
                 brainstorm: {
                     title: 'Brainstorming',
@@ -299,7 +303,7 @@ Brainstorm verschillende manieren om het team mee te krijgen in de volgende vera
                     tip: 'Vraag expliciet om oordelen uit te stellen ("deferred judgment").'
                 },
                 questions: {
-                    title: 'Questions Up Front',
+                    title: 'Questions up front',
                     subtitle: 'Laat de AI jou helpen denken',
                     example: 'Help me deze bedrijfsovername goed doordenken door me vooraf de juiste vragen te stellen. Begin met wat jij denkt dat de kernvraag is in deze deal.'
                 },
