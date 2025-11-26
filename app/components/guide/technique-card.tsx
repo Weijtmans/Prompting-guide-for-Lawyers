@@ -29,7 +29,7 @@ export function TechniqueCard({
 
   const labels = {
     en: {
-      whenToUse: "When to use",
+      whenToUse: "Explanation",
       examplePrompt: "Example Prompt",
       dos: "Do",
       donts: "Don't",
@@ -39,7 +39,7 @@ export function TechniqueCard({
       copied: "Copied!",
     },
     nl: {
-      whenToUse: "Wanneer te gebruiken",
+      whenToUse: "Toelichting",
       examplePrompt: "Voorbeeldprompt",
       dos: "Wel",
       donts: "Niet",
