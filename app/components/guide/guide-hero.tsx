@@ -1,11 +1,15 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { GL } from "@/components/gl"
+import dynamic from "next/dynamic"
 import { Button } from "@/components/ui/button"
 import { ChevronDown } from "lucide-react"
 import { Logo } from "@/components/logo"
 import { LanguageSwitcher } from "./language-switcher"
+
+const GL = dynamic(() => import("@/components/gl").then((mod) => mod.GL), {
+  ssr: false,
+})
 
 interface GuideHeroProps {
   language: "en" | "nl"

@@ -42,12 +42,12 @@ export function GuideContent({ language }: GuideContentProps) {
               {t.mainTitle}
             </h2>
             <p className="text-lg text-foreground/70 print:text-neutral-600">{t.tagline}</p>
-            
+
             {/* Print button */}
             <Button
               onClick={handlePrint}
-              className="mt-8 mx-auto flex items-center gap-2 print:hidden"
               variant="outline"
+              className="mt-8 mx-auto flex items-center gap-2 print:hidden"
             >
               <Printer className="h-4 w-4" />
               {language === "en" ? "Print Guide" : "Promptgids Afdrukken"}
