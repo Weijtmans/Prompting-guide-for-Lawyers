@@ -5,14 +5,12 @@ import Introduction from './components/Introduction'
 import WarningBox from './components/WarningBox'
 import BestPractices from './components/BestPractices'
 import Fundamentals from './components/Fundamentals'
-import LegalResearch from './components/use-cases/LegalResearch'
-import ContractDrafting from './components/use-cases/ContractDrafting'
-import Litigation from './components/use-cases/Litigation'
-import ClientCommunication from './components/use-cases/ClientCommunication'
-import Strategy from './components/use-cases/Strategy'
-import { LanguageProvider } from './context/LanguageContext'
+import { useLanguage, LanguageProvider } from './context/LanguageContext'
+import UseCaseSection from './components/UseCaseSection'
+import { useCasesConfig } from './config/useCases'
 
 function AppContent() {
+  const { t } = useLanguage()
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -34,11 +32,14 @@ function AppContent() {
 
                 <div className="my-12 border-t pt-12">
                   <h2 className="text-3xl font-bold mb-8 print:hidden">Juridische Use Cases</h2>
-                  <ContractDrafting />
-                  <LegalResearch />
-                  <Litigation />
-                  <ClientCommunication />
-                  <Strategy />
+                  {useCasesConfig.map((config) => (
+                    <UseCaseSection
+                      key={config.id}
+                      {...config}
+                      title={t(`useCases.${config.id.replace(/-([a-z])/g, (g) => g[1].toUpperCase())}.title`)}
+                      description={t(`useCases.${config.id.replace(/-([a-z])/g, (g) => g[1].toUpperCase())}.desc`)}
+                    />
+                  ))}
                 </div>
               </div>
             </main>
