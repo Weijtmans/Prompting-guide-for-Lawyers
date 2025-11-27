@@ -34,7 +34,7 @@ export function Introduction({ language }: IntroductionProps) {
                 Andri
               </a>
               {" "}of{" "}
-              <a href="https://zeno.legal" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+              <a href="https://zeno.law" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
                 Zeno
               </a>
               )
@@ -46,7 +46,7 @@ export function Introduction({ language }: IntroductionProps) {
                 Andri
               </a>
               {" "}or{" "}
-              <a href="https://zeno.legal" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+              <a href="https://zeno.law" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
                 Zeno
               </a>
               )
