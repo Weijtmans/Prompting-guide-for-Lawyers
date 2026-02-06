@@ -2,6 +2,10 @@
 
 A modern, user-friendly React application for the prompting guide for lawyers. Built with React, TypeScript, Vite, and Tailwind CSS (with shadcn/ui design system).
 
+## 🌐 Live Version
+
+The application is available at: **[https://prompting.hvglaw.nl/](https://prompting.hvglaw.nl/)**
+
 ## 🚀 Quick Start
 
 ### Option 1: Direct Use (Recommended)
