@@ -92,9 +92,7 @@ The application contains detailed information for:
 ### Node.js Version Too Old
 
 If you get an error about the Node.js version:
-
-- **Solution 1**: Use the `prompting-app-standalone.html` file
-- **Solution 2**: Update Node.js to version 20.19+ or 22.12+
+Update Node.js to version 20.19+ or 22.12+
 
 ### Build Errors
 
