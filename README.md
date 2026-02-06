@@ -1,4 +1,4 @@
-# Prompting Hand-out for Lawyers - React App
+# Prompting Hand-out for Lawyers
 
 A modern, user-friendly React application for the prompting guide for lawyers. Built with React, TypeScript, Vite, and Tailwind CSS (with shadcn/ui design system).
 
