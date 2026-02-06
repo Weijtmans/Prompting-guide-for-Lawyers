@@ -8,20 +8,6 @@ The application is available at: **[https://prompting.hvglaw.nl/](https://prompt
 
 ## 🚀 Quick Start
 
-### Option 1: Direct Use (Recommended)
-
-Open the standalone file directly in your browser:
-
-```bash
-open prompting-app-standalone.html
-```
-
-This file works without installation or build process and contains all functionality.
-
-### Option 2: Development Mode (Requires Node.js 20.19+ or 22.12+)
-
-If you want to run the React development version:
-
 ```bash
 cd prompting-app
 npm install
