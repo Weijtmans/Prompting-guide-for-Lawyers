@@ -1,22 +1,22 @@
-# Prompting Hand-out voor Advocaten - React App
+# Prompting Hand-out for Lawyers - React App
 
-Een moderne, gebruiksvriendelijke React-applicatie voor de prompting handleiding voor advocaten. Gebouwd met React, TypeScript, Vite en Tailwind CSS (met shadcn/ui design system).
+A modern, user-friendly React application for the prompting guide for lawyers. Built with React, TypeScript, Vite, and Tailwind CSS (with shadcn/ui design system).
 
-## 🚀 Snelle Start
+## 🚀 Quick Start
 
-### Optie 1: Direct Gebruik (Aanbevolen)
+### Option 1: Direct Use (Recommended)
 
-Open het standalone bestand direct in je browser:
+Open the standalone file directly in your browser:
 
 ```bash
 open prompting-app-standalone.html
 ```
 
-Dit bestand werkt zonder installatie of build process en bevat alle functionaliteit.
+This file works without installation or build process and contains all functionality.
 
-### Optie 2: Development Mode (Vereist Node.js 20.19+ of 22.12+)
+### Option 2: Development Mode (Requires Node.js 20.19+ or 22.12+)
 
-Als je de React-ontwikkelversie wilt draaien:
+If you want to run the React development version:
 
 ```bash
 cd prompting-app
@@ -24,18 +24,18 @@ npm install
 npm run dev
 ```
 
-**Let op:** De huidige Node.js versie (20.5.1) is te oud voor de nieuwste Vite. Update Node.js of gebruik de standalone versie.
+**Note:** The current Node.js version (20.5.1) is too old for the latest Vite. Update Node.js or use the standalone version.
 
-## ✨ Functies
+## ✨ Features
 
-- **Elegante UI**: Moderne interface met shadcn/ui design patterns
-- **Zoekfunctionaliteit**: Snel zoeken door alle technieken en frameworks
-- **Responsief Design**: Werkt perfect op desktop, tablet en mobiel
-- **Print-vriendelijk**: Optimaal voor het printen of opslaan als PDF
-- **Use Case Index**: Vind snel de juiste techniek voor jouw situatie
-- **Interactieve Navigatie**: Smooth scrolling en duidelijke structuur
+- **Elegant UI**: Modern interface with shadcn/ui design patterns
+- **Search Functionality**: Quickly search through all techniques and frameworks
+- **Responsive Design**: Works perfectly on desktop, tablet, and mobile
+- **Print-Friendly**: Optimized for printing or saving as PDF
+- **Use Case Index**: Quickly find the right technique for your situation
+- **Interactive Navigation**: Smooth scrolling and clear structure
 
-## 📁 Project Structuur
+## 📁 Project Structure
 
 ```
 prompting-app/
@@ -61,56 +61,56 @@ prompting-app/
 
 ## 🎨 Design System
 
-Het project gebruikt:
-- **Tailwind CSS**: Voor utility-first styling
-- **shadcn/ui**: Voor consistente en mooie UI componenten
-- **Lucide Icons**: Voor moderne iconografie
-- **Responsive Grid Layouts**: Voor optimale weergave op alle schermformaten
+The project uses:
 
-## 🛠️ Technische Details
+- **Tailwind CSS**: For utility-first styling
+- **shadcn/ui**: For consistent and beautiful UI components
+- **Lucide Icons**: For modern iconography
+- **Responsive Grid Layouts**: For optimal display on all screen sizes
 
-- **Framework**: React 18 met TypeScript
+## 🛠️ Technical Details
+
+- **Framework**: React 18 with TypeScript
 - **Build Tool**: Vite 7
-- **Styling**: Tailwind CSS 3 met @tailwindcss/postcss
+- **Styling**: Tailwind CSS 3 with @tailwindcss/postcss
 - **Component Library**: shadcn/ui (headless components)
 - **Icons**: Lucide React
 
-## 📝 Gebruik
+## 📝 Usage
 
-1. **Zoeken**: Gebruik de zoekbalk bovenaan om snel technieken te vinden
-2. **Navigatie**: Klik op items in de inhoudsopgave voor directe navigatie
-3. **Use Cases**: Bekijk de use case index om te zien welke technieken bij jouw situatie passen
-4. **Printen**: Klik op "Print / Opslaan als PDF" om een printbare versie te maken
-5. **Downloaden**: Klik op "Download HTML" om het bestand lokaal op te slaan
+1. **Search**: Use the search bar at the top to quickly find techniques
+2. **Navigation**: Click on items in the table of contents for direct navigation
+3. **Use Cases**: Browse the use case index to see which techniques fit your situation
+4. **Print**: Click "Print / Save as PDF" to create a printable version
+5. **Download**: Click "Download HTML" to save the file locally
 
 ## 🎯 Use Cases
 
-De applicatie bevat gedetailleerde informatie voor:
-- 📄 Contractanalyse
-- ⚖️ Processtukken
-- 💼 Cliëntcommunicatie
-- 🔍 Juridische analyse
-- 🎯 Risicoanalyse
-- 💡 Strategische verkenning
-- 📋 Documentverwerking
-- ✍️ Schrijfopdrachten
+The application contains detailed information for:
+
+- 📄 Contract Analysis
+- ⚖️ Litigation Documents
+- 💼 Client Communication
+- 🔍 Legal Analysis
+- 🎯 Risk Analysis
+- 💡 Strategic Exploration
+- 📋 Document Processing
+- ✍️ Writing Assignments
 
 ## 🚧 Troubleshooting
 
-### Node.js Versie Te Oud
+### Node.js Version Too Old
 
-Als je een error krijgt over Node.js versie:
-- **Oplossing 1**: Gebruik de `prompting-app-standalone.html` file
-- **Oplossing 2**: Update Node.js naar versie 20.19+ of 22.12+
+If you get an error about the Node.js version:
+
+- **Solution 1**: Use the `prompting-app-standalone.html` file
+- **Solution 2**: Update Node.js to version 20.19+ or 22.12+
 
 ### Build Errors
 
-Als npm build faalt:
+If npm build fails:
+
 ```bash
 npm clean-install
 npm run build
 ```
-
-## 📄 Licentie
-
-© 2025 - Prompting hand-out voor advocaten
